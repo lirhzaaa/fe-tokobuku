@@ -28,7 +28,7 @@ const Login = () => {
                                 )}
                             </button>
                         } />
-                        <Button color="primary" >Login</Button>
+                        <Button color="primary">Login</Button>
                     </form>
                 </CardBody>
             </Card>
