@@ -23,7 +23,7 @@ const Register = () => {
     <div className="flex flex-col items-center justify-center">
       <Card className="w-fit">
         <CardBody className="px-8 py-5">
-          <h1 className="text-xl font-bold text-primary">Create Account</h1>
+          <h1 className="text-2xl font-bold text-primary mb-2">Create Account</h1>
           <p className="text-foreground text-sm">Have an account?&nbsp;
             <Link href="/auth/login" className="font-semibold text-sm text-primary">Login</Link>
           </p>
