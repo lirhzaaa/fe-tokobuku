@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@heroui/react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -15,9 +17,9 @@ const Activation = (props: IPropsTypes) => {
                 <Image src="/images/general/logo.svg" alt="Success Activation" width={200} height={200} />
             </div>
             <div className="flex flex-col items-center justify-center text-center gap-2">
-                <h4 className="text-2xl font-bold text-danger">{status === "success" ? "Activation Success" : "Activation Failed"}</h4>
+                <h4 className="text-2xl font-bold text-primary">{status === "success" ? "Activation Success" : "Activation Failed"}</h4>
                 <p className="text-md font-semibold text-default-500">{status === "success" ? "Thank you for register account in Tokobuku" : "Confirmation code is invalid"}</p>
-                <Button className="mt-4 w-fit" variant="bordered" color="danger" onClick={() => router.push("/")}>Back To Home</Button>
+                <Button className="mt-4 w-fit" variant="bordered" color="primary" onClick={() => router.push("/")}>Back To Home</Button>
             </div>
         </div>
     )

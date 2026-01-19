@@ -1,43 +1,35 @@
-import AuthLayout from "@/src/components/layouts/AuthLayout"
-import Activation from "@/src/components/views/Auth/Activation"
-import AuthService from "@/src/services/auth.service"
+import AuthLayout from "@/src/components/layouts/AuthLayout";
+import Activation from "@/src/components/views/Auth/Activation";
+import AuthService from "@/src/services/auth.service";
 
-interface IProps {
-    status: "success" | "failed"
+interface PageProps {
+  searchParams: {
+    code?: string;
+  };
 }
 
-const ActivationPage = (props: IProps) => {
-    return (
-        <AuthLayout>
-            <Activation {...props} />
-        </AuthLayout>
-    )
-}
+const ActivationPage = async ({ searchParams }: PageProps) => {
+  let status: "success" | "failed" = "failed";
 
-export async function getServerSideProps(context: { query: { code: string } }) {
+  if (searchParams.code) {
     try {
-        const result = await AuthService.activation({ code: context.query.code })
-        if (result.data.data) {
-            return {
-                props: {
-                    status: "success"
-                }
-            }
-        } else {
-            return {
-                props: {
-                    status: "failed"
-                }
-            }
-        }
-    } catch (error) {
-        return {
-            props: {
-                status: "failed",
-                error: error
-            }
-        }
-    }
-}
+      const result = await AuthService.activation({
+        code: searchParams.code,
+      });
 
-export default ActivationPage
+      if (result.data.data) {
+        status = "success";
+      }
+    } catch {
+      status = "failed";
+    }
+  }
+
+  return (
+    <AuthLayout>
+      <Activation status={status} />
+    </AuthLayout>
+  );
+};
+
+export default ActivationPage;
