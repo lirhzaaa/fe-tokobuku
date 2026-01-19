@@ -38,6 +38,7 @@ const useLogin = () => {
             redirect: false,
             callbackUrl: callbackURL
         })
+        console.log(result)
         if (result?.error) {
             throw new Error(result.error);
         }

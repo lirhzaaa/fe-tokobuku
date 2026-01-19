@@ -1,11 +1,16 @@
 "use client";
 
-import { HeroUIProvider } from "@heroui/react";
+import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, useState } from "react";
 
 export function HeroUI({ children }: { children: React.ReactNode }) {
-  return <HeroUIProvider>{children}</HeroUIProvider>;
+  return (
+    <HeroUIProvider>
+      <ToastProvider />
+      {children}
+    </HeroUIProvider>
+  );
 }
 
 export default function ReactQueryProvider({
