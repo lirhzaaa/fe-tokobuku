@@ -1,6 +1,12 @@
-import { Bookmark, BookText, LayoutDashboard, Newspaper, ShoppingCart, Tags, User, Wallet } from "lucide-react"
+import { Bookmark, BookText, LayoutDashboard, Newspaper, ShoppingCart, Tags, Wallet } from "lucide-react"
 
 const SIDEBAR_ADMIN = [
+    {
+        key: "dashboard",
+        label: "Dashboard",
+        href: "/admin/dashboard",
+        icon: <LayoutDashboard />
+    },
     {
         key: "books",
         label: "Books",
