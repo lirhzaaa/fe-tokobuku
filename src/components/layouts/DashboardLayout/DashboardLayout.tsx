@@ -7,13 +7,11 @@ import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Navbar, 
 
 interface PropsTypes {
     children?: ReactNode
-    title?: string
-    description?: string
     type?: string
 }
 
 const DashboardLayout = (props: PropsTypes) => {
-    const { children, title, description, type } = props
+    const { children, type } = props
     const [open, setOpen] = useState(false)
 
     return (
@@ -21,9 +19,15 @@ const DashboardLayout = (props: PropsTypes) => {
             <div className="max-w-screen-2xl 2xl:container flex">
                 <DashboardLayoutSidebar sidebarItems={type === "admin" ? SIDEBAR_ADMIN : SIDEBAR_USER} isOpen={open} />
                 <div className="h-screen w-full overflow-y-auto">
-                    <Navbar className={`flex justify-between items-center border-b border-default-200 w-full`} position="static" >
-                        <NavbarMenuToggle arial-label={open ? "Close Menu" : "Open Menu"} onClick={() => setOpen(!open)} />
-                        <NavbarContent as="div" justify="end">
+                    <Navbar className="border-b border-default-200" position="static" maxWidth="full">
+                        <NavbarContent justify="start">
+                            <NavbarMenuToggle
+                                aria-label={open ? "Close Menu" : "Open Menu"}
+                                onClick={() => setOpen(!open)}
+                            />
+                        </NavbarContent>
+
+                        <NavbarContent justify="end">
                             <Dropdown placement="bottom-end">
                                 <DropdownTrigger>
                                     <Avatar
@@ -53,7 +57,6 @@ const DashboardLayout = (props: PropsTypes) => {
                                 </DropdownMenu>
                             </Dropdown>
                         </NavbarContent>
-
                     </Navbar>
                     <div className="p-5">
                         {children}
