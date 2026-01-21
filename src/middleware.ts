@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
     }
 
     if (pathname === "/admin") {
-      return NextResponse.redirect(new URL("/admin/event", request.url));
+      return NextResponse.redirect(new URL("/admin/dashboard", request.url));
     }
 
     return NextResponse.next();

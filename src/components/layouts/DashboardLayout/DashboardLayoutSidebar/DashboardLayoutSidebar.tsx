@@ -34,7 +34,7 @@ const DashboardLayoutSidebar = (props: PropsTypes) => {
                 <div className="flex">
                     <Image src="/images/general/logo.png" alt="Logo" width={180} height={60} className="mb-6 w-36 cursor-pointer" onClick={() => router.push("/")} />
                 </div>
-                <Listbox items={sidebarItems} variant="solid" aria-label="Dashboard Menu" className="p-0">
+                <Listbox items={sidebarItems} variant="solid" className="p-0">
                     {(item) => (
                         <ListboxItem key={item.key} className={cn("h-12 mb-2 text-2xl transition-all duration-300", {
                             "bg-primary text-white": pathname.startsWith(item.href)

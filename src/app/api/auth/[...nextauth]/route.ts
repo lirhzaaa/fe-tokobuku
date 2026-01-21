@@ -1,4 +1,5 @@
 import { environment } from "@/src/config/environment";
+import AuthServer from "@/src/services/auth.server";
 import AuthService from "@/src/services/auth.service";
 import { JWTExtended, SessionExtended, UserExtended } from "@/src/types/Auth";
 import NextAuth, { AuthOptions } from "next-auth";
@@ -18,30 +19,20 @@ const authOptions: AuthOptions = {
         identifier: { label: "identifier", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize(
-        credentials: Record<"identifier" | "password", string> | undefined,
-      ): Promise<UserExtended | null> {
-        const { identifier, password } = credentials as {
-          identifier: string;
-          password: string;
-        };
-        const resultToken = await AuthService.login({
-          identifier,
-          password,
-        });
-        const accessToken = resultToken.data.data;
-        const me = await AuthService.findToken(accessToken);
-        const user = me.data.data;
+      async authorize(credentials) {
+        try {
+          const { identifier, password } = credentials!;
 
-        if (
-          accessToken &&
-          resultToken.status === 200 &&
-          user._id &&
-          me.status === 200
-        ) {
-          user.accessToken = accessToken;
+          const login = await AuthServer.login({ identifier, password });
+          const token = login.data.data;
+
+          const me = await AuthServer.findToken(token);
+          const user = me.data.data;
+
+          user.accessToken = token;
           return user;
-        } else {
+        } catch (e) {
+          console.log("LOGIN ERROR:", e);
           return null;
         }
       },
