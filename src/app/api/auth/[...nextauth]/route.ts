@@ -1,10 +1,10 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { environment } from "@/src/config/environment";
 import AuthService from "@/src/services/auth.service";
 import { JWTExtended, SessionExtended, UserExtended } from "@/src/types/Auth";
+import NextAuth, { AuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions = {
+const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
     maxAge: 60 * 60 * 24,
@@ -12,49 +12,52 @@ export const authOptions = {
   secret: environment.AUTH_SECRET,
   providers: [
     CredentialsProvider({
+      id: "credentials",
       name: "credentials",
       credentials: {
         identifier: { label: "identifier", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize(credentials) {
-        if (!credentials) return null;
+      async authorize(
+        credentials: Record<"identifier" | "password", string> | undefined,
+      ): Promise<UserExtended | null> {
+        const { identifier, password } = credentials as {
+          identifier: string;
+          password: string;
+        };
+        const resultToken = await AuthService.login({
+          identifier,
+          password,
+        });
+        const accessToken = resultToken.data.data;
+        const me = await AuthService.findToken(accessToken);
+        const user = me.data.data;
 
-        try {
-          const resultToken = await AuthService.login({
-            identifier: credentials.identifier,
-            password: credentials.password,
-          }).catch(() => null);
-
-          if (!resultToken || resultToken.status !== 200) {
-            return null;
-          }
-
-          const accessToken = resultToken.data.data;
-
-          const me = await AuthService.findToken(accessToken).catch(() => null);
-
-          if (!me || me.status !== 200) {
-            return null;
-          }
-
-          const user = me.data.data;
-
-          if (user?._id) {
-            user.accessToken = accessToken;
-            return user;
-          }
-
-          return null;
-        } catch {
+        if (
+          accessToken &&
+          resultToken.status === 200 &&
+          user._id &&
+          me.status === 200
+        ) {
+          user.accessToken = accessToken;
+          return user;
+        } else {
           return null;
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: JWTExtended; user: UserExtended | null }) {
-      if (user) token.user = user;
+    async jwt({
+      token,
+      user,
+    }: {
+      token: JWTExtended;
+      user: UserExtended | null;
+    }) {
+      if (user) {
+        token.user = user;
+      }
       return token;
     },
     async session({
@@ -72,5 +75,4 @@ export const authOptions = {
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };

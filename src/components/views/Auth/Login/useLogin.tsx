@@ -18,9 +18,9 @@ const loginSchema = yup.object().shape({
 const useLogin = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const callbackURL = searchParams.get("callbackURL") || "/";
-    const [visible, setVisible] = useState(false);
     const handleVisible = () => setVisible(!visible)
+    const [visible, setVisible] = useState(false);
+    const callbackUrl = searchParams.get("callbackUrl") || "/";
 
     const {
         control,
@@ -36,8 +36,8 @@ const useLogin = () => {
         const result = await signIn("credentials", {
             ...payload,
             redirect: false,
-            callbackUrl: callbackURL
-        })
+            callbackUrl,
+        });
         console.log(result)
         if (result?.error) {
             throw new Error(result.error);
@@ -68,7 +68,7 @@ const useLogin = () => {
                 description: "Login berhasil",
                 color: "success",
             });
-            router.push(callbackURL);
+            router.push(callbackUrl);
             reset();
         }
     })

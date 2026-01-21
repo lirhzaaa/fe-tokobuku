@@ -1,35 +1,57 @@
-import AuthLayout from "@/src/components/layouts/AuthLayout";
-import Activation from "@/src/components/views/Auth/Activation";
-import AuthService from "@/src/services/auth.service";
+import AuthLayout from "@/src/components/layouts/AuthLayout"
+import Activation from "@/src/components/views/Auth/Activation"
+import { environment } from "@/src/config/environment"
 
-interface PageProps {
-  searchParams: {
-    code?: string;
-  };
+interface IProps {
+    searchParams: Promise<{ code?: string }>
 }
 
-const ActivationPage = async ({ searchParams }: PageProps) => {
-  let status: "success" | "failed" = "failed";
+export default async function ActivationPage({ searchParams }: IProps) {
+    const params = await searchParams
+    let status: "success" | "failed" = "failed"
 
-  if (searchParams.code) {
     try {
-      const result = await AuthService.activation({
-        code: searchParams.code,
-      });
+        const code = params.code
 
-      if (result.data.data) {
-        status = "success";
-      }
-    } catch {
-      status = "failed";
+        if (!code) {
+            return (
+                <AuthLayout>
+                    <Activation status="failed" />
+                </AuthLayout>
+            )
+        }
+
+        const fullURL = `${environment.API_URL}/api/auth/activation`
+        
+        const response = await fetch(fullURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ code }),
+            cache: 'no-store',
+        })
+
+        const responseText = await response.text()
+        if (!response.headers.get('content-type')?.includes('application/json')) {
+            console.error("response:", responseText)
+            status = "failed"
+        } else {
+            const result = JSON.parse(responseText)
+            console.log("result:", result)
+            if (response.ok && result?.data) {
+                status = "success"
+            } else {
+                console.log("failed:", result)
+            }
+        }
+    } catch (error) {
+        console.error("activation error:", error)
     }
-  }
 
-  return (
-    <AuthLayout>
-      <Activation status={status} />
-    </AuthLayout>
-  );
-};
-
-export default ActivationPage;
+    return (
+        <AuthLayout>
+            <Activation status={status} />
+        </AuthLayout>
+    )
+}
