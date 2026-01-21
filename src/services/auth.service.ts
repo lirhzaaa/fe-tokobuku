@@ -8,7 +8,7 @@ const AuthService = {
     return instance.post(`${ENDPOINT.AUTH}/register`, payload);
   },
   activation: async (payload: IActivation) => {
-    return instance.post(`${ENDPOINT.AUTH}/activationCode`, payload);
+    return instance.post(`${ENDPOINT.AUTH}/activation`, payload);
   },
   login: async (payload: ILogin) => {
     return instance.post(`${ENDPOINT.AUTH}/login`, payload);
