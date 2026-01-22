@@ -15,6 +15,8 @@ interface IInfoTypes {
 
 const InfoTab = (props: IInfoTypes) => {
     const { dataCategory, onUpdate, isPendingUpdateCategory, isSuccessUpdateCategory } = props
+    console.log(dataCategory)
+
     const {
         controlUpdateInformation,
         handleSubmitUpdateInformation,
@@ -49,7 +51,6 @@ const InfoTab = (props: IInfoTypes) => {
                                 {...field}
                                 label="Name"
                                 placeholder="Please Input Name For Category"
-                                type="text"
                                 variant="bordered"
                                 labelPlacement="outside"
                                 defaultValue={dataCategory?.name}
@@ -72,7 +73,7 @@ const InfoTab = (props: IInfoTypes) => {
                             />
                         )} />
                     </Skeleton>
-                    <Skeleton isLoaded={!!dataCategory?.isActive} className="rounded-lg">
+                    <Skeleton isLoaded={dataCategory?.isActive !== undefined} className="rounded-lg">
                         <Controller name="isActive" control={controlUpdateInformation} render={({ field }) => (
                             <Select
                                 {...field}
@@ -89,7 +90,7 @@ const InfoTab = (props: IInfoTypes) => {
                             </Select>
                         )} />
                     </Skeleton>
-                    <Button color="danger" type="submit" className="disabled:bg-default-500 mt-2" disabled={isPendingUpdateCategory || !dataCategory?._id}>
+                    <Button color="primary" type="submit" className="disabled:bg-default-500 mt-2" disabled={isPendingUpdateCategory || !dataCategory?._id}>
                         {isPendingUpdateCategory ? (
                             <Spinner size="sm" color="white" />
                         ) : "Save Changes"}
