@@ -21,7 +21,7 @@ export default async function ActivationPage({ searchParams }: IProps) {
             )
         }
 
-        const fullURL = `${environment.API_URL}/api/auth/activation`
+        const fullURL = `${environment.API_URL}/auth/activation`
         
         const response = await fetch(fullURL, {
             method: 'POST',
