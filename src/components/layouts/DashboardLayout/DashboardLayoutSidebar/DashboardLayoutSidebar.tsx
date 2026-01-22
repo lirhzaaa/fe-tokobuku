@@ -3,7 +3,7 @@
 import { Button, Listbox, ListboxItem } from "@heroui/react"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
-import { JSX } from "react"
+import { JSX, useEffect, useState } from "react"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { cn } from "@/src/utils/cn"
@@ -40,7 +40,6 @@ const DashboardLayoutSidebar = (props: PropsTypes) => {
                             "bg-primary text-white": pathname.startsWith(item.href)
                         })}
                             startContent={item.icon}
-                            aria-labelledby={item.label}
                             aria-describedby={item.label}
                             as={Link}
                             href={item.href}
