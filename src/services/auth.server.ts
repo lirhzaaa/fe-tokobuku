@@ -1,8 +1,9 @@
 import axios from "axios";
 import { environment } from "../config/environment";
+import { ILogin } from "../types/Auth";
 
 const AuthServer = {
-  login: (payload) =>
+  login: (payload: ILogin) =>
     axios.post(`${environment.API_URL}/auth/login`, payload),
 
   findToken: (token: string) =>

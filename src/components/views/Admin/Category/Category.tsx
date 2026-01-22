@@ -4,7 +4,6 @@ import { Chip, useDisclosure } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Key, ReactNode, useCallback, useEffect } from "react"
 import useCategory from "./useCategory";
-import Image from "next/image";
 import useChangeUrl from "@/src/hooks/useChangeUrl";
 import DropdownAction from "@/src/components/common/DropdownAction";
 import DataTable from "@/src/components/ui/DataTable";

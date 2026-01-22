@@ -1,3 +1,5 @@
+"use client"
+
 import AuthLayout from "@/src/components/layouts/AuthLayout"
 import Register from "@/src/components/views/Auth/Register"
 
