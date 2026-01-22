@@ -9,6 +9,7 @@ const CategoryService = {
   getCategory: (params?: string) =>
     instance.get(`${ENDPOINT.CATEGORY}?${params}`),
   getCategoryById: (id: string) => instance.get(`${ENDPOINT.CATEGORY}/${id}`),
+  deleteCategoryById: (id: string) => instance.delete(`${ENDPOINT.CATEGORY}/${id}`),
 };
 
 export default CategoryService;

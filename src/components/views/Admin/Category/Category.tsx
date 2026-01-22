@@ -8,6 +8,7 @@ import useChangeUrl from "@/src/hooks/useChangeUrl";
 import DropdownAction from "@/src/components/common/DropdownAction";
 import DataTable from "@/src/components/ui/DataTable";
 import { COLUMN_LISTS_CATEGORY } from "./Category.constants";
+import DeleteCategory from "./DeleteCategory";
 
 const Category = () => {
   const router = useRouter();
@@ -68,15 +69,15 @@ const Category = () => {
           emptyContent="Category is empty"
         />
       )}
-
-      {/* <AddCategory
+      {/* 
+      <AddCategory
                 {...addCategory}
-                refetchCategory={refetchCategory} />
-            <DeleteCategory
-                {...deleteCategory}
-                selectedId={selectedId}
-                setSelectedId={setSelectedId}
                 refetchCategory={refetchCategory} /> */}
+      <DeleteCategory
+        {...deleteCategory}
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
+        refetchCategory={refetchCategory} />
     </section>
   )
 }
