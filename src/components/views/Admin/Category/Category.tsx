@@ -9,6 +9,7 @@ import DropdownAction from "@/src/components/common/DropdownAction";
 import DataTable from "@/src/components/ui/DataTable";
 import { COLUMN_LISTS_CATEGORY } from "./Category.constants";
 import DeleteCategory from "./DeleteCategory";
+import AddCategory from "./AddCategory";
 
 const Category = () => {
   const router = useRouter();
@@ -69,10 +70,10 @@ const Category = () => {
           emptyContent="Category is empty"
         />
       )}
-      {/* 
+
       <AddCategory
-                {...addCategory}
-                refetchCategory={refetchCategory} /> */}
+        {...addCategory}
+        refetchCategory={refetchCategory} />
       <DeleteCategory
         {...deleteCategory}
         selectedId={selectedId}
