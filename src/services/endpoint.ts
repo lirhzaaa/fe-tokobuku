@@ -3,6 +3,7 @@ const ENDPOINT = {
   CATEGORY: "/category",
   BANNER: "/banner",
   MEDIA: "/media",  
+  BOOK: "/book"
 };
 
 export default ENDPOINT;

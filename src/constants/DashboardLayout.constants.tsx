@@ -8,9 +8,9 @@ const SIDEBAR_ADMIN = [
         icon: <LayoutDashboard />
     },
     {
-        key: "books",
-        label: "Books",
-        href: "/admin/books",
+        key: "book",
+        label: "Book",
+        href: "/admin/book",
         icon: <BookText />
     },
     {
@@ -41,9 +41,9 @@ const SIDEBAR_USER = [
         icon: <LayoutDashboard />
     },
     {
-        key: "books",
-        label: "Books",
-        href: "/books",
+        key: "book",
+        label: "Book",
+        href: "/book",
         icon: <BookText />
     },
     {
