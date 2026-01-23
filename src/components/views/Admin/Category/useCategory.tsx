@@ -7,7 +7,6 @@ import { useState } from "react";
 
 const useCategory = () => {
   const [selectedId, setSelectedId] = useState<string>("");
-
   const { currentLimit, currentPage, currentSearch } = useChangeUrl();
 
   const getCategories = async () => {

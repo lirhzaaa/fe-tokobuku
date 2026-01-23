@@ -22,7 +22,7 @@ const DropdownAction = (props: DropdownTypes) => {
                     <EllipsisVertical size={15} className="text-default-500" />
                 </Button>
             </DropdownTrigger>
-            <DropdownMenu aria-label="Dropdown Actions">
+            <DropdownMenu aria-label="Dropdown Action">
                 <DropdownItem key="detail" onPress={onPressButtonDetail}>
                     Detail
                 </DropdownItem>
