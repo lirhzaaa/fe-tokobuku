@@ -1,4 +1,3 @@
-import AuthLayout from "@/src/components/layouts/AuthLayout"
 import Activation from "@/src/components/views/Auth/Activation"
 import { environment } from "@/src/config/environment"
 
@@ -14,15 +13,11 @@ export default async function ActivationPage({ searchParams }: IProps) {
         const code = params.code
 
         if (!code) {
-            return (
-                <AuthLayout>
-                    <Activation status="failed" />
-                </AuthLayout>
-            )
+            return <Activation status="failed" />
         }
 
         const fullURL = `${environment.API_URL}/auth/activation`
-        
+
         const response = await fetch(fullURL, {
             method: 'POST',
             headers: {
@@ -49,9 +44,5 @@ export default async function ActivationPage({ searchParams }: IProps) {
         console.error("activation error:", error)
     }
 
-    return (
-        <AuthLayout>
-            <Activation status={status} />
-        </AuthLayout>
-    )
+    return <Activation status={status} />
 }

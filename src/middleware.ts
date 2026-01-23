@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
 
   if (pathname.startsWith("/auth")) {
     if (token) {
-      return NextResponse.redirect(new URL("/member", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
     return NextResponse.next();
   }
@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
     }
 
     if (token.user?.role !== "admin") {
-      return NextResponse.redirect(new URL("/member", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
 
     if (pathname === "/admin") {
@@ -37,17 +37,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (pathname.startsWith("/member")) {
-    if (!token) {
-      const url = new URL("/auth/login", request.url);
-      url.searchParams.set("callbackUrl", request.url);
-      return NextResponse.redirect(url);
-    }
+  if (!token && pathname === "/") {
+    const url = new URL("/auth/login", request.url);
+    url.searchParams.set("callbackUrl", request.url);
+    return NextResponse.redirect(url);
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/auth/:path*", "/admin/:path*", "/member/:path*"],
+  matcher: ["/auth/:path*", "/admin/:path*", "/"],
 };

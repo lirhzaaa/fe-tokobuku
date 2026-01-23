@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import type { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,36 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL("http://tokobuku-v1.vercel.app/"),
+  title: {
+    default: "Tokobuku",
+    template: `%s | Tokobuku`,
+  },
+  openGraph: {
+    title: "Tokobuku",
+    url: "http://tokobuku-v1.vercel.app/",
+    siteName: "Tokobuku",
+    locale: "",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "",
+    yandex: "",
+  },
+};
 
 export default function RootLayout({
   children,

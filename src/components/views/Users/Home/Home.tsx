@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <div>
-      <h1>Home Section Admin</h1>
+      <h1>Home Section Users</h1>
     </div>
   )
 }

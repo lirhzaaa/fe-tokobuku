@@ -1,4 +1,4 @@
-import { LIMIT_LIST } from "@/src/app/constants/list.constants"
+import { LIMIT_LIST } from "@/src/constants/list.constants"
 import useChangeUrl from "@/src/hooks/useChangeUrl"
 import { cn } from "@/src/utils/cn"
 import { Button, Input, Pagination, Select, SelectItem, Spinner, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/react"

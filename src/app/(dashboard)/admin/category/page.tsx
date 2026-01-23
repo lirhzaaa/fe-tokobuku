@@ -1,13 +1,15 @@
 "use client";
 
 import { Suspense } from "react";
-import Login from "@/src/components/views/Auth/Login";
+import Category from "@/src/components/views/Admin/Category";
 import { Spinner } from "@heroui/react";
 
-export default function LoginPage() {
+const CategoryPage = () => {
     return (
         <Suspense fallback={<Spinner color="primary" size="sm" className="mx-auto mt-4" />}>
-            <Login />
+            <Category />
         </Suspense>
     );
-}
+};
+
+export default CategoryPage;

@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent } from "react";
-import { DELAY, LIMIT_DEFAULT, PAGE_DEFAULT } from "../app/constants/list.constants";
+import { DELAY, LIMIT_DEFAULT, PAGE_DEFAULT } from "../constants/list.constants";
 import useDebounce from "./useDebounce";
 
 const useChangeUrl = () => {

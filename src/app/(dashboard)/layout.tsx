@@ -1,10 +1,10 @@
 "use client"
 
 import { Fragment, ReactNode, useState } from "react"
-import DashboardLayoutSidebar from "./DashboardLayoutSidebar"
-import { SIDEBAR_ADMIN, SIDEBAR_USER } from "./DashboardLayout.constans"
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Navbar, NavbarContent, NavbarMenuToggle } from "@heroui/react"
 import { usePathname } from "next/navigation"
+import { SIDEBAR_ADMIN, SIDEBAR_USER } from "../../constants/DashboardLayout.constants"
+import DashboardLayoutSidebar from "@/src/components/layouts/DashboardLayoutSidebar"
 
 interface PropsTypes {
     children?: ReactNode
