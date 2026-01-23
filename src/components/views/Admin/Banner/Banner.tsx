@@ -9,6 +9,8 @@ import DataTable from "@/src/components/ui/DataTable"
 import { COLUMN_LISTS_BANNER } from "./Banner.constants"
 import DropdownAction from "@/src/components/common/DropdownAction"
 import useChangeUrl from "@/src/hooks/useChangeUrl"
+import AddBanner from "./AddBanner"
+import DeleteBanner from "./DeleteBanner"
 
 const Banner = () => {
     const router = useRouter();
@@ -18,6 +20,8 @@ const Banner = () => {
         dataBanner,
         isLoadingBanner,
         isRefetchingBanner,
+        refetchBanner,
+        selectedId,
         setSelectedId } = useBanner()
 
     const addBanner = useDisclosure()
@@ -73,7 +77,7 @@ const Banner = () => {
                 />
             )}
 
-            {/* <AddBanner
+            <AddBanner
                 {...addBanner}
                 refetchBanner={refetchBanner} />
 
@@ -81,7 +85,7 @@ const Banner = () => {
                 {...deleteBanner}
                 selectedId={selectedId}
                 setSelectedId={setSelectedId}
-                refetchBanner={refetchBanner} /> */}
+                refetchBanner={refetchBanner} />
         </section>
     )
 }

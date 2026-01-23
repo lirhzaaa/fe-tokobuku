@@ -9,8 +9,8 @@ const formDataHeader = {
 };
 
 const MediaService = {
-  updateFile: (payload: FormData) =>
-    instance.post(`${ENDPOINT.MEDIA}/uplaod/single`, payload, formDataHeader),
+  uploadFile: (payload: FormData) =>
+    instance.post(`${ENDPOINT.MEDIA}/upload/single`, payload, formDataHeader),
   deleteFile: (payload: IFileUrl) =>
     instance.delete(`${ENDPOINT.MEDIA}/delete`, { data: payload }),
 };
