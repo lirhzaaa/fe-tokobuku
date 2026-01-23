@@ -43,7 +43,7 @@ const Banner = () => {
                 case "actions":
                     return (
                         <DropdownAction
-                            onPressButtonDetail={() => router.push(`/admin/category/${banner._id}`)}
+                            onPressButtonDetail={() => router.push(`/admin/banner/${banner._id}`)}
                             onPressButtonDelete={() => {
                                 setSelectedId(`${banner._id}`);
                                 deleteBanner.onOpen()
