@@ -11,6 +11,8 @@ import useChangeUrl from "@/src/hooks/useChangeUrl"
 import { COLUMN_LISTS_BOOK } from "./Book.constans"
 import { ICategory } from "@/src/types/Category"
 import { convertIDR } from "@/src/utils/currency"
+import DeleteBook from "./DeleteBook"
+import AddBook from "./AddBook"
 
 const Book = () => {
     const router = useRouter();
@@ -82,7 +84,7 @@ const Book = () => {
                 />
             )}
 
-            {/* <AddBook
+            <AddBook
                 {...addBook}
                 refetchBook={refetchBook} />
 
@@ -90,7 +92,7 @@ const Book = () => {
                 {...deleteBook}
                 selectedId={selectedId}
                 setSelectedId={setSelectedId}
-                refetchBook={refetchBook} /> */}
+                refetchBook={refetchBook} />
         </section>
     )
 }

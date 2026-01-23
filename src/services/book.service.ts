@@ -5,6 +5,10 @@ import ENDPOINT from "./endpoint";
 const BookService = {
   addBook: (payload: IBook) => instance.post(`${ENDPOINT.BOOK}`, payload),
   getBook: (params?: string) => instance.get(`${ENDPOINT.BOOK}?${params}`),
+  getById: (id: string) => instance.get(`${ENDPOINT.BOOK}/${id}`),
+  updateBook: (id: string, payload: Partial<IBook>) =>
+    instance.put(`${ENDPOINT.BOOK}/${id}`, payload),
+  deleteBook: (id: string) => instance.delete(`${ENDPOINT.BOOK}/${id}`),
 };
 
 export default BookService;

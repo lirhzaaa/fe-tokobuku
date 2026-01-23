@@ -1,12 +1,13 @@
 interface IBook {
+  image: string | FileList;
   title: string;
   author: string;
   description: string;
-  price: number;
-  stock: number;
+  price: string;
+  stock: string;
   category: string;
-  isActive: boolean;
-  isFeatured: boolean;
+  isActive: string;
+  isFeatured: string;
 }
 
 export { IBook };
