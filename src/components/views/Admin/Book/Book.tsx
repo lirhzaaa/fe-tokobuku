@@ -46,7 +46,7 @@ const Book = () => {
                     if (!cellValue) {
                         return "-"
                     }
-                    return cellValue
+                    return <span>{cellValue as string}</span>
                 case "category":
                     const category = cellValue as ICategory
                     if (!category) {
