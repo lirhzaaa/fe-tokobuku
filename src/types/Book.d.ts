@@ -3,6 +3,7 @@ interface IBook {
   image: string | FileList;
   title: string;
   author: string;
+  publishDate: string;
   description: string;
   price: string;
   stock: string;
@@ -11,4 +12,4 @@ interface IBook {
   isFeatured: string;
 }
 
-export { IBook };
+export { IBook};

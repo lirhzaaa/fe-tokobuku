@@ -1,6 +1,6 @@
 "use client"
 
-import { Autocomplete, AutocompleteItem, Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, Spinner, Textarea } from "@heroui/react"
+import { Autocomplete, AutocompleteItem, Button, DatePicker, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, Spinner, Textarea } from "@heroui/react"
 import { Controller } from "react-hook-form"
 import { useEffect } from "react"
 import useAddBook from "./useAddBook"
@@ -55,16 +55,31 @@ const AddBook = (props: IAddBook) => {
                         <div className="flex flex-col gap-4">
                             <p className="text-sm font-bold">Information</p>
                             <Controller name="title" control={control} render={({ field }) => (
-                                <Input {...field} label="Title" variant="bordered" type="text" isInvalid={errors.title !== undefined} errorMessage={errors.title?.message} />
+                                <Input {...field} label="Title" variant="bordered" isInvalid={errors.title !== undefined} errorMessage={errors.title?.message} />
                             )} />
                             <Controller name="author" control={control} render={({ field }) => (
-                                <Input {...field} label="Author" variant="bordered" type="text" isInvalid={errors.author !== undefined} errorMessage={errors.author?.message} />
+                                <Input {...field} label="Author" variant="bordered" isInvalid={errors.author !== undefined} errorMessage={errors.author?.message} />
                             )} />
+                            <Controller
+                                name="publishDate"
+                                control={control}
+                                render={({ field }) => (
+                                    <DatePicker
+                                        label="Publish Date"
+                                        variant="bordered"
+                                        showMonthAndYearPickers 
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        isInvalid={!!errors.publishDate}
+                                        errorMessage={errors.publishDate?.message}
+                                    />
+                                )}
+                            />
                             <Controller name="price" control={control} render={({ field }) => (
-                                <Input {...field} label="Price" variant="bordered" type="text" isInvalid={errors.price !== undefined} errorMessage={errors.price?.message} />
+                                <Input {...field} label="Price" variant="bordered" isInvalid={errors.price !== undefined} errorMessage={errors.price?.message} />
                             )} />
                             <Controller name="stock" control={control} render={({ field }) => (
-                                <Input {...field} label="Stock" variant="bordered" type="text" isInvalid={errors.stock !== undefined} errorMessage={errors.stock?.message} />
+                                <Input {...field} label="Stock" variant="bordered" isInvalid={errors.stock !== undefined} errorMessage={errors.stock?.message} />
                             )} />
                             <Controller name="category" control={control} render={({ field: { onChange, ...field } }) => (
                                 <Autocomplete

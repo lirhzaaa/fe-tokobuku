@@ -40,10 +40,18 @@ const Book = () => {
             switch (columnKey) {
                 case "image":
                     return (
-                        <Image src={`${cellValue}`} alt="image" width={150} height={200} className="rounded-lg" />
+                        <Image src={`${cellValue}`} alt="image" width={100} height={150} className="rounded-lg" />
                     )
+                case "publishDate":
+                    if (!cellValue) {
+                        return "-"
+                    }
+                    return cellValue
                 case "category":
                     const category = cellValue as ICategory
+                    if (!category) {
+                        return "-"
+                    }
                     return category.name
                 case "price":
                     return `${convertIDR(cellValue as number)}`

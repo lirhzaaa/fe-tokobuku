@@ -1,25 +1,27 @@
-import { Autocomplete, AutocompleteItem, Button, Card, CardBody, CardHeader, Input, Select, SelectItem, Skeleton, Spinner, Textarea } from "@heroui/react"
+import { Autocomplete, AutocompleteItem, Button, Card, CardBody, CardHeader, DatePicker, Input, Select, SelectItem, Skeleton, Spinner, Textarea } from "@heroui/react"
 import { Controller } from "react-hook-form"
 import { useEffect } from "react"
-import useInfoTab from "./useInfoTab"
-import { IBook } from "@/src/types/Book"
+import useInfoTab, { BookFormValues } from "./useInfoTab"
 import { ICategory } from "@/src/types/Category"
+import { toDateValue } from "@/src/utils/date"
 
-export interface IBooks {
+interface IBookDetail {
     _id?: string;
+    image: string;
     title: string;
     author: string;
+    publishDate: string;
     description: string;
     price: string;
     stock: string;
     category: ICategory;
-    isActive: string;
-    isFeatured: string;
+    isActive: boolean;
+    isFeatured: boolean;
 }
 
 interface IInfoTypes {
-    dataBook: IBooks
-    onUpdate: (data: Partial<IBook>) => void
+    dataBook: IBookDetail
+    onUpdate: (data: BookFormValues) => void
     isPendingUpdateBook: boolean
     isSuccessUpdateBook: boolean
 }
@@ -28,7 +30,6 @@ const InfoTab = (props: IInfoTypes) => {
     const { dataBook, onUpdate, isPendingUpdateBook, isSuccessUpdateBook } = props
     const {
         dataCategory,
-
         controlUpdateInformation,
         handleSubmitUpdateInformation,
         errorsUpdateInformation,
@@ -38,23 +39,26 @@ const InfoTab = (props: IInfoTypes) => {
 
     useEffect(() => {
         if (dataBook) {
-            setValueUpdateInformation('title', `${dataBook?.title}`)
-            setValueUpdateInformation('author', `${dataBook?.author}`)
-            setValueUpdateInformation('description', `${dataBook?.description}`)
-            setValueUpdateInformation('price', `${dataBook?.price}`)
-            setValueUpdateInformation('stock', `${dataBook?.stock}`)
-            setValueUpdateInformation('category', `${dataBook?.category?._id}`)
-            setValueUpdateInformation('isActive', `${dataBook?.isActive}`)
-            setValueUpdateInformation('isFeatured', `${dataBook?.isFeatured}`)
+            setValueUpdateInformation('title', dataBook.title || '')
+            setValueUpdateInformation('author', dataBook.author || '')
+            const dateValue = toDateValue(dataBook.publishDate)
+            if (dateValue) {
+                setValueUpdateInformation("publishDate", dateValue)
+            }
+            setValueUpdateInformation('description', dataBook.description || '')
+            setValueUpdateInformation('price', dataBook.price || '')
+            setValueUpdateInformation('stock', dataBook.stock || '')
+            setValueUpdateInformation('category', dataBook.category?._id || '')
+            setValueUpdateInformation('isActive', String(dataBook.isActive))
+            setValueUpdateInformation('isFeatured', String(dataBook.isFeatured))
         }
-
-    }, [dataBook])
+    }, [dataBook, setValueUpdateInformation])
 
     useEffect(() => {
         if (isSuccessUpdateBook) {
             resetUpdateInformation()
         }
-    }, [isSuccessUpdateBook])
+    }, [isSuccessUpdateBook, resetUpdateInformation])
 
     return (
         <Card className="w-full lg:w-1/2 p-4">
@@ -72,7 +76,6 @@ const InfoTab = (props: IInfoTypes) => {
                                 placeholder="Please Input Title For Book"
                                 variant="bordered"
                                 labelPlacement="outside"
-                                defaultValue={dataBook?.title}
                                 isInvalid={errorsUpdateInformation.title !== undefined}
                                 errorMessage={errorsUpdateInformation.title?.message}
                             />
@@ -86,11 +89,24 @@ const InfoTab = (props: IInfoTypes) => {
                                 placeholder="Please Input author For Book"
                                 variant="bordered"
                                 labelPlacement="outside"
-                                defaultValue={dataBook?.author}
                                 isInvalid={errorsUpdateInformation.author !== undefined}
                                 errorMessage={errorsUpdateInformation.author?.message}
                             />
                         )} />
+                    </Skeleton>
+                    <Skeleton isLoaded={!!dataBook?.publishDate} className="rounded-lg">
+                        <Controller name="publishDate" control={controlUpdateInformation} render={({ field }) => (
+                            <DatePicker
+                                {...field}
+                                label="Publish Date"
+                                variant="bordered"
+                                labelPlacement="outside"
+                                showMonthAndYearPickers
+                                isInvalid={errorsUpdateInformation.publishDate !== undefined}
+                                errorMessage={errorsUpdateInformation.publishDate?.message}
+                            />
+                        )}
+                        />
                     </Skeleton>
                     <Skeleton isLoaded={!!dataBook?.price} className="rounded-lg">
                         <Controller name="price" control={controlUpdateInformation} render={({ field }) => (
@@ -100,7 +116,6 @@ const InfoTab = (props: IInfoTypes) => {
                                 placeholder="Please Input price For Book"
                                 variant="bordered"
                                 labelPlacement="outside"
-                                defaultValue={dataBook?.price}
                                 isInvalid={errorsUpdateInformation.price !== undefined}
                                 errorMessage={errorsUpdateInformation.price?.message}
                             />
@@ -114,13 +129,12 @@ const InfoTab = (props: IInfoTypes) => {
                                 placeholder="Please Input stock For Book"
                                 variant="bordered"
                                 labelPlacement="outside"
-                                defaultValue={dataBook?.stock}
                                 isInvalid={errorsUpdateInformation.stock !== undefined}
                                 errorMessage={errorsUpdateInformation.stock?.message}
                             />
                         )} />
                     </Skeleton>
-                    <Skeleton isLoaded={!!dataBook?.category !== undefined} className="rounded-lg">
+                    <Skeleton isLoaded={dataBook?.category !== undefined} className="rounded-lg">
                         <Controller name="category" control={controlUpdateInformation} render={({ field: { onChange, ...field } }) => (
                             <Autocomplete
                                 {...field}
@@ -142,7 +156,7 @@ const InfoTab = (props: IInfoTypes) => {
                             </Autocomplete>
                         )} />
                     </Skeleton>
-                    <Skeleton isLoaded={!!dataBook?.isActive !== undefined} className="rounded-lg">
+                    <Skeleton isLoaded={dataBook?.isActive !== undefined} className="rounded-lg">
                         <Controller name="isActive" control={controlUpdateInformation} render={({ field }) => (
                             <Select
                                 {...field}
@@ -153,13 +167,13 @@ const InfoTab = (props: IInfoTypes) => {
                                 disallowEmptySelection
                                 isInvalid={errorsUpdateInformation.isActive !== undefined}
                                 errorMessage={errorsUpdateInformation.isActive?.message}
-                                defaultSelectedKeys={[dataBook?.isActive ? "true" : "false"]}>
+                                defaultSelectedKeys={[String(dataBook?.isActive)]}>
                                 <SelectItem key="true" textValue="Publish">Publish</SelectItem>
                                 <SelectItem key="false" textValue="Pending">Pending</SelectItem>
                             </Select>
                         )} />
                     </Skeleton>
-                    <Skeleton isLoaded={!!dataBook?.isFeatured !== undefined} className="rounded-lg">
+                    <Skeleton isLoaded={dataBook?.isFeatured !== undefined} className="rounded-lg">
                         <Controller name="isFeatured" control={controlUpdateInformation} render={({ field }) => (
                             <Select
                                 {...field}
@@ -170,7 +184,7 @@ const InfoTab = (props: IInfoTypes) => {
                                 disallowEmptySelection
                                 isInvalid={errorsUpdateInformation.isFeatured !== undefined}
                                 errorMessage={errorsUpdateInformation.isFeatured?.message}
-                                defaultSelectedKeys={[dataBook?.isFeatured ? "true" : "false"]}>
+                                defaultSelectedKeys={[String(dataBook?.isFeatured)]}>
                                 <SelectItem key="true" textValue="Active">Active</SelectItem>
                                 <SelectItem key="false" textValue="Pending">Pending</SelectItem>
                             </Select>
@@ -184,7 +198,6 @@ const InfoTab = (props: IInfoTypes) => {
                                 placeholder="Please Input description For Book"
                                 variant="bordered"
                                 labelPlacement="outside"
-                                defaultValue={dataBook?.description}
                                 isInvalid={errorsUpdateInformation.description !== undefined}
                                 errorMessage={errorsUpdateInformation.description?.message}
                             />

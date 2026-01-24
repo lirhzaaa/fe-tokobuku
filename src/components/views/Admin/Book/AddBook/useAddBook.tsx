@@ -4,16 +4,20 @@ import useMediaHandling from "@/src/hooks/useMediaHandling"
 import BookService from "@/src/services/book.service"
 import CategoryService from "@/src/services/category.service"
 import { IBook } from "@/src/types/Book"
-import { addToast } from "@heroui/react"
+import { toDateStandard } from "@/src/utils/date"
+import { addToast, DateValue } from "@heroui/react"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { parseDate } from "@internationalized/date"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import * as Yup from "yup"
+type AdBookFormValues = Yup.InferType<typeof schema>;
 
 const schema = Yup.object().shape({
     image: Yup.mixed<FileList | string>().required("Please input image"),
     title: Yup.string().required("Please input title"),
     author: Yup.string().required("Please input author"),
+    publishDate: Yup.mixed<DateValue>().required("Please select publish date"),
     description: Yup.string().required("Please input description"),
     price: Yup.string().required("Please input price"),
     stock: Yup.string().required("Please input stock"),
@@ -33,12 +37,13 @@ const useAddBook = () => {
 
     const {
         control, handleSubmit: handleSubmitForm, formState: { errors }, reset, watch, getValues, setValue
-    } = useForm<IBook>({
+    } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
             image: undefined as unknown as FileList,
             title: "",
             author: "",
+            publishDate: parseDate("2026-01-01"),
             description: "",
             price: "",
             stock: "",
@@ -101,7 +106,13 @@ const useAddBook = () => {
         }
     })
 
-    const handleAddBook = (data: IBook) => mutateAddBook(data)
+    const handleAddBook = (data: AdBookFormValues) => {
+        const payload: IBook = {
+            ...data,
+            publishDate: data.publishDate ? toDateStandard(data.publishDate) : "",
+        }
+        mutateAddBook(payload)
+    }
 
     return {
         control,

@@ -7,7 +7,8 @@ const DetailBook = () => {
     const {
         dataBook,
 
-        handleUpdateBook,
+        handleUpdateBookInfo,
+        handleUpdateBookImage,
         isPendingMutateUpdateBook,
         isSuccessMutateUpdateBook,
     } = useDetailBook()
@@ -17,7 +18,7 @@ const DetailBook = () => {
             <Tab key="image" title="Image">
                 <ImageTab
                     currentImage={dataBook?.image}
-                    onUpdate={handleUpdateBook}
+                    onUpdate={handleUpdateBookImage}
                     isPendingUpdateBook={isPendingMutateUpdateBook}
                     isSuccessUpdateBook={isSuccessMutateUpdateBook}
                 />
@@ -25,7 +26,7 @@ const DetailBook = () => {
             <Tab key="info" title="Info">
                 <InfoTab
                     dataBook={dataBook}
-                    onUpdate={handleUpdateBook}
+                    onUpdate={handleUpdateBookInfo}
                     isPendingUpdateBook={isPendingMutateUpdateBook}
                     isSuccessUpdateBook={isSuccessMutateUpdateBook} />
             </Tab>
