@@ -9,13 +9,13 @@ const useBook = () => {
     const [selectedId, setSelectedId] = useState<string>("")
     const { currentLimit, currentPage, currentSearch } = useChangeUrl();
 
-    const getBook = async () => {
+    const findBook = async () => {
         let params = `limit=${currentLimit}&page=${currentPage}`
         if (currentSearch) {
             params += `&search=${currentSearch}`
         }
 
-        const result = await BookService.getBook(params)
+        const result = await BookService.findBook(params)
         const { data } = result
         return data
     }
@@ -28,7 +28,7 @@ const useBook = () => {
         refetch: refetchBook,
     } = useQuery({
         queryKey: ["Books", currentPage, currentLimit, currentSearch],
-        queryFn: () => getBook(),
+        queryFn: () => findBook(),
         enabled: !!currentPage && !!currentLimit,
     });
 

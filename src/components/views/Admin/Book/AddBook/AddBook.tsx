@@ -92,7 +92,7 @@ const AddBook = (props: IAddBook) => {
                                     isInvalid={errors.isActive !== undefined}
                                     errorMessage={errors.isActive?.message}
                                     disallowEmptySelection>
-                                    <SelectItem key="true" textValue="Active">Active</SelectItem>
+                                    <SelectItem key="true" textValue="Publish">Publish</SelectItem>
                                     <SelectItem key="false" textValue="Pending">Pending</SelectItem>
                                 </Select>
                             )} />

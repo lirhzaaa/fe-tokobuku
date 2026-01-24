@@ -14,7 +14,7 @@ const DetailBanner = () => {
 
     return (
         <Tabs aria-label="Options Detail Category">
-            <Tab key="icon" title="Icon">
+            <Tab key="image" title="Image">
                 <ImageTab
                     currentImage={dataBanner?.image}
                     onUpdate={handleUpdateBanner}

@@ -86,7 +86,7 @@ const InputFile = (props: IInputFile) => {
                             <Download className="mb-2 h-10 w-10 text-gray-400" />
                         </div>
                         <p className="text-center text-sm font-semibold text-gray-500">
-                            {isDropable ? "Drag and drop on click to updload file here" : "Click to upload file here"}
+                            {isDropable ? "Drag and drop on click to upload file here" : "Click to upload file here"}
                         </p>
                     </div>
                 )}

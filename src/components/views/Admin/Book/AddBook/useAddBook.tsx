@@ -20,7 +20,6 @@ const schema = Yup.object().shape({
     category: Yup.string().required("Please select category"),
     isActive: Yup.string().required("Please select status"),
     isFeatured: Yup.string().required("Please select status"),
-
 })
 
 const useAddBook = () => {
