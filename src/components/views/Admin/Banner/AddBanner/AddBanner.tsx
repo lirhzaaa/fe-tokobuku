@@ -71,6 +71,7 @@ const AddBanner = (props: IAddBanner) => {
                                     {...field}
                                     isInvalid={errors.image !== undefined}
                                     errorMessage={errors.image?.message}
+                                    isDropable
                                     onUpload={(files) => handleUploadImage(files, onChange)}
                                     onDelete={() => handleDeleteImage(onChange)}
                                     isDeleting={isPendingMutateDeleteFile}
