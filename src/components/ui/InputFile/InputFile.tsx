@@ -72,7 +72,7 @@ const InputFile = (props: IInputFile) => {
                         </div>
                         <Button isIconOnly onPress={onDelete} disabled={isDeleting} className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded bg-danger-100">
                             {isDeleting ? (
-                                <Spinner size="sm" color="danger" />
+                                <Spinner size="sm" color="primary" />
                             ) : (
                                 <Trash className="h-5 w-5 text-danger-500" />
                             )}
@@ -92,7 +92,7 @@ const InputFile = (props: IInputFile) => {
                 )}
                 {isUploading && (
                     <div className="flex flex-col items-center justify-center p-5">
-                        <Spinner color="danger" />
+                        <Spinner color="primary" />
                     </div>
                 )}
                 <input type="file" className="hidden" accept="image/*" id={`dropzone-file-${dropzoneId}`} name={name} onChange={handleOnUpload} disabled={preview !== ""} onClick={(e) => {

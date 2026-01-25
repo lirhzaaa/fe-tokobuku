@@ -72,7 +72,7 @@ const InfoTab = (props: IInfoTypes) => {
                             </Select>
                         )} />
                     </Skeleton>
-                    <Button color="danger" type="submit" className="disabled:bg-default-500 mt-2" disabled={isPendingUpdateBanner || !dataBanner?._id}>
+                    <Button color="primary" type="submit" className="disabled:bg-default-500 mt-2" disabled={isPendingUpdateBanner || !dataBanner?._id}>
                         {isPendingUpdateBanner ? (
                             <Spinner size="sm" color="white" />
                         ) : "Save Changes"}

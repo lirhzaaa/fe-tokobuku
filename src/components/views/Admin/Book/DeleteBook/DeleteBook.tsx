@@ -51,7 +51,7 @@ const DeleteBook = (props: IDeleteBook) => {
                     }}>
                         Cancel
                     </Button>
-                    <Button color="danger" type="submit" disabled={isPendingDeleteBook} onPress={() => mutateDeleteBook(selectedId)}>
+                    <Button color="primary" type="submit" disabled={isPendingDeleteBook} onPress={() => mutateDeleteBook(selectedId)}>
                         {isPendingDeleteBook ? (
                             <Spinner size="sm" color="white" />
                         ) : "Delete Book"}

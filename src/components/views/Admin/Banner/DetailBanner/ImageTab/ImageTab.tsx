@@ -62,7 +62,7 @@ const ImageTab = (props: IImageTypes) => {
                             preview={typeof preview === "string" ? preview : ""}
                             isDropable />
                     )} />
-                    <Button color="danger" type="submit" className="disabled:bg-default-500 mt-2" disabled={isPendingMutateUploadFile || isPendingUpdateBanner || !preview}>
+                    <Button color="primary" type="submit" className="disabled:bg-default-500 mt-2" disabled={isPendingMutateUploadFile || isPendingUpdateBanner || !preview}>
                         {isPendingUpdateBanner ? (
                             <Spinner size="sm" color="white" />
                         ) : "Save Changes"}

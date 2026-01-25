@@ -51,7 +51,7 @@ const DeleteBanner = (props: IDeleteBanner) => {
                     }}>
                         Cancel
                     </Button>
-                    <Button color="danger" type="submit" disabled={isPendingDeleteBanner} onPress={() => mutateDeleteBanner(selectedId)}>
+                    <Button color="primary" type="submit" disabled={isPendingDeleteBanner} onPress={() => mutateDeleteBanner(selectedId)}>
                         {isPendingDeleteBanner ? (
                             <Spinner size="sm" color="white" />
                         ) : "Delete Banner"}

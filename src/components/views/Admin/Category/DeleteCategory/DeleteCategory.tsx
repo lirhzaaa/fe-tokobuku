@@ -51,7 +51,7 @@ const DeleteCategory = (props: IDeleteCategory) => {
                     }}>
                         Cancel
                     </Button>
-                    <Button color="danger" type="submit" disabled={isPendingDeleteCategory} onPress={() => mutateDeleteCategory(selectedId)}>
+                    <Button color="primary" type="submit" disabled={isPendingDeleteCategory} onPress={() => mutateDeleteCategory(selectedId)}>
                         {isPendingDeleteCategory ? (
                             <Spinner size="sm" color="white" />
                         ) : "Delete Category"}

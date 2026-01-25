@@ -61,7 +61,7 @@ export default function DashboardLayoutClient({
                   </DropdownItem>
                   <DropdownItem key="profile">Profile</DropdownItem>
                   <DropdownItem key="settings">Settings</DropdownItem>
-                  <DropdownItem key="logout" color="danger">
+                  <DropdownItem key="logout" color="primary">
                     Log Out
                   </DropdownItem>
                 </DropdownMenu>
