@@ -73,7 +73,7 @@ const InfoTab = (props: IInfoTypes) => {
                             />
                         )} />
                     </Skeleton>
-                    <Skeleton isLoaded={dataCategory?.isActive !== undefined} className="rounded-lg">
+                    <Skeleton isLoaded={dataCategory !== undefined} className="rounded-lg">
                         <Controller name="isActive" control={controlUpdateInformation} render={({ field }) => (
                             <Select
                                 {...field}
@@ -84,7 +84,7 @@ const InfoTab = (props: IInfoTypes) => {
                                 disallowEmptySelection
                                 isInvalid={errorsUpdateInformation.isActive !== undefined}
                                 errorMessage={errorsUpdateInformation.isActive?.message}
-                                defaultSelectedKeys={[dataCategory?.isActive ? "true" : "false"]}>
+                                selectedKeys={field.value ? [field.value] : []}>
                                 <SelectItem key="true" textValue="Active">Active</SelectItem>
                                 <SelectItem key="false" textValue="Pending">Pending</SelectItem>
                             </Select>
