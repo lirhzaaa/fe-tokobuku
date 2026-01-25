@@ -1,3 +1,5 @@
+import { ICategory } from "./Category";
+
 interface IBook {
   _id?: string;
   image: string | FileList;
@@ -7,7 +9,7 @@ interface IBook {
   description: string;
   price: string;
   stock: string;
-  category: string;
+  category: string | ICategory;
   isActive: string;
   isFeatured: string;
 }
