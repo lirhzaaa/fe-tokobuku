@@ -23,7 +23,8 @@ const Home = () => {
     <Fragment>
       <HomeBanner banners={dataBanner?.data} isLoadingBanner={isLoadingBanner} />
       <HomeBook 
-        title="Buku populer" 
+        title="Rekomendasi Buku"
+        subtitle="Temukan buku favorite yang kamu cari!!!" 
         books={books}
         categories={categories}
         isLoading={isLoadingFeaturedBook || isLoadingCategory}

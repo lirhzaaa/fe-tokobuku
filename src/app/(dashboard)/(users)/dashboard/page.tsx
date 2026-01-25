@@ -1,7 +1,10 @@
+"use client"
+
 import Home from "@/src/components/views/Users/Home"
 
+
 const HomePage = () => {
-  return <Home />
+    return <Home />
 }
 
 export default HomePage

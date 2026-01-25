@@ -1,9 +1,7 @@
+import Book from "@/src/components/views/Users/Book"
+
 const BookPage = () => {
-    return (
-        <div>
-            <h1>Book page</h1>
-        </div>
-    )
+    return <Book />
 }
 
 export default BookPage
