@@ -8,9 +8,13 @@ const CategoryService = {
   },
   getCategory: (params?: string) =>
     instance.get(`${ENDPOINT.CATEGORY}?${params}`),
+  getCategoryActive: (params?: string) =>
+    instance.get(`${ENDPOINT.CATEGORY}/active?${params}`),
   getCategoryById: (id: string) => instance.get(`${ENDPOINT.CATEGORY}/${id}`),
-  updateCategory: (id: string, payload: ICategory) => instance.put(`${ENDPOINT.CATEGORY}/${id}`, payload),
-  deleteCategoryById: (id: string) => instance.delete(`${ENDPOINT.CATEGORY}/${id}`),
+  updateCategory: (id: string, payload: ICategory) =>
+    instance.put(`${ENDPOINT.CATEGORY}/${id}`, payload),
+  deleteCategoryById: (id: string) =>
+    instance.delete(`${ENDPOINT.CATEGORY}/${id}`),
 };
 
 export default CategoryService;

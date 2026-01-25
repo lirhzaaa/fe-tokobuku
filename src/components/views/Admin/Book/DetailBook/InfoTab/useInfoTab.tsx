@@ -54,7 +54,7 @@ const useInfoTab = () => {
 
     const { data: dataCategory } = useQuery({
         queryKey: ["Categories"],
-        queryFn: () => CategoryService.getCategory(),
+        queryFn: () => CategoryService.getCategoryActive(),
         enabled: true
     })
 
