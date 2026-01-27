@@ -4,6 +4,7 @@ import { IBlog } from "@/src/types/Blog"
 import { cn } from "@/src/utils/cn"
 import { Card, CardBody, CardFooter, CardHeader, Skeleton } from "@heroui/react"
 import Image from "next/image"
+import Link from "next/link"
 import { Fragment } from "react"
 
 interface ICardBlog {
@@ -17,10 +18,12 @@ const CardBlog = (props: ICardBlog) => {
   const { blog, className, isLoading, onClick } = props
 
   return (
-    <Card 
-      shadow="sm" 
+    <Card
+      shadow="sm"
       isPressable={!isLoading}
       onPress={onClick}
+      as={Link}
+      href={isLoading ? "#" : `/blog/${blog?.slug}`}
       className={cn(
         "transition-all hover:shadow-lg",
         !isLoading && "cursor-pointer",
@@ -49,12 +52,12 @@ const CardBlog = (props: ICardBlog) => {
       ) : (
         <Fragment>
           <CardHeader className="relative overflow-hidden p-0">
-            {blog?.coverImage ? (
-              <Image 
-                src={blog.coverImage} 
-                alt={blog.title}
-                width={1200} 
-                height={800} 
+            {blog?.image ? (
+              <Image
+                src={`${blog.image}`}
+                alt={`${blog.title}`}
+                width={1200}
+                height={800}
                 className="object-cover w-full h-48"
               />
             ) : (
@@ -68,15 +71,15 @@ const CardBlog = (props: ICardBlog) => {
             <h3 className="text-xl font-bold line-clamp-2 text-foreground">
               {blog?.title}
             </h3>
-            
+
             <p className="text-sm text-default-600 line-clamp-3">
               {blog?.excerpt}
             </p>
-            
+
             {blog?.tags && blog.tags.length > 0 && (
               <ul className="flex gap-2 flex-wrap mt-2">
                 {blog.tags.slice(0, 3).map((tag) => (
-                  <li 
+                  <li
                     key={tag}
                     className="px-3 py-1 bg-primary-100 text-primary-600 text-xs rounded-full font-medium"
                   >
@@ -96,9 +99,7 @@ const CardBlog = (props: ICardBlog) => {
             <div className="flex items-center gap-2">
               <span className="text-xs">By</span>
               <span className="font-medium text-default-700">
-                {typeof blog?.author === 'object' && blog.author && 'name' in blog.author
-                  ? blog.author 
-                  : 'Anonymous'}
+                {`${blog?.author}`}
               </span>
             </div>
           </CardFooter>

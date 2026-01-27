@@ -2,28 +2,29 @@
 
 import useMediaHandling from "@/src/hooks/useMediaHandling"
 import BlogService from "@/src/services/blog.service"
-import CategoryService from "@/src/services/category.service"
 import { IBlog } from "@/src/types/Blog"
-import { addToast, DateValue } from "@heroui/react"
+import { addToast } from "@heroui/react"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { parseDate } from "@internationalized/date"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import * as Yup from "yup"
-type AdBlogFormValues = Yup.InferType<typeof schema>;
 
 const schema = Yup.object().shape({
-    image: Yup.mixed<FileList | string>().required("Please input image"),
-    title: Yup.string().required("Please input title"),
-    author: Yup.string().required("Please input author"),
-    publishDate: Yup.mixed<DateValue>().required("Please select publish date"),
-    description: Yup.string().required("Please input description"),
-    price: Yup.string().required("Please input price"),
-    stock: Yup.string().required("Please input stock"),
-    category: Yup.string().required("Please select category"),
+    title: Yup.string().required("Please input title").min(3).max(200),
+    slug: Yup.string().defined(),
+    excerpt: Yup.string().required("Please input excerpt").min(10).max(300),
+    image: Yup.mixed<FileList | string>().required("Please input cover image"),
+    content: Yup.string().required("Please input content").min(50),
+    tags: Yup.array()
+        .of(Yup.string().required())
+        .min(1, "Please input at least one tag")
+        .required("Please input tags"),
+    author: Yup.string().defined(),
     isActive: Yup.string().required("Please select status"),
-    isFeatured: Yup.string().required("Please select status"),
-})
+    isFeatured: Yup.string().required("Please select featured status"),
+});
+
+type AddBlogFormValues = Yup.InferType<typeof schema>;
 
 const useAddBlog = () => {
     const {
@@ -34,19 +35,25 @@ const useAddBlog = () => {
         handleDeleteFile,
     } = useMediaHandling()
 
+
     const {
-        control, handleSubmit: handleSubmitForm, formState: { errors }, reset, watch, getValues, setValue
-    } = useForm({
+        control,
+        handleSubmit: handleSubmitForm,
+        formState: { errors },
+        reset,
+        watch,
+        getValues,
+        setValue
+    } = useForm<AddBlogFormValues>({
         resolver: yupResolver(schema),
         defaultValues: {
             image: undefined as unknown as FileList,
             title: "",
+            slug: "",
+            excerpt: "",
+            content: "",
+            tags: [""],
             author: "",
-            publishDate: parseDate("2026-01-01"),
-            description: "",
-            price: "",
-            stock: "",
-            category: "",
             isActive: "true",
             isFeatured: "true",
         }
@@ -76,17 +83,15 @@ const useAddBlog = () => {
         })
     }
 
-    const { data: dataCategory } = useQuery({
-        queryKey: ["Categories"],
-        queryFn: () => CategoryService.getCategoryActive(),
-        enabled: true
-    })
-
     const addBlog = async (payload: IBlog) => {
         return await BlogService.addBlog(payload)
     }
 
-    const { mutate: mutateAddBlog, isPending: isPendingMutateAddBlog, isSuccess: isSuccessMutateAddBlog } = useMutation({
+    const {
+        mutate: mutateAddBlog,
+        isPending: isPendingMutateAddBlog,
+        isSuccess: isSuccessMutateAddBlog
+    } = useMutation({
         mutationFn: addBlog,
         onError: (error) => {
             addToast({
@@ -98,14 +103,14 @@ const useAddBlog = () => {
         onSuccess: () => {
             addToast({
                 title: "Success",
-                description: "Success add Banner",
+                description: "Success add blog",
                 color: "success"
             })
             reset()
         }
     })
 
-    const handleAddBlog = (payload: AdBlogFormValues) => mutateAddBlog(payload)
+    const handleAddBlog = (payload: AddBlogFormValues) => mutateAddBlog(payload)
 
     return {
         control,
@@ -123,7 +128,6 @@ const useAddBlog = () => {
         isPendingMutateDeleteFile,
         isPendingMutateUploadFile,
 
-        dataCategory,
         handleOnClose
     }
 }

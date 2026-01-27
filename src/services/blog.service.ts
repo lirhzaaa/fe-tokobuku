@@ -7,6 +7,7 @@ const BlogService = {
     findBlog: (params?: string) => instance.get(`${ENDPOINT.BLOG}?${params}`),
     findBySlug: (slug: string) => instance.get(`${ENDPOINT.BLOG}/slug/${slug}`),
     findOne: (id: string) => instance.get(`${ENDPOINT.BLOG}/${id}`),
+    deleteBlog: (id: string) => instance.delete(`${ENDPOINT.BLOG}/${id}`),
 }
 
 export default BlogService

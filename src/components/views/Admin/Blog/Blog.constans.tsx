@@ -1,5 +1,5 @@
 const COLUMN_LISTS_BLOG = [
-    { name: "IMAGE", uid: "coverImage" },
+    { name: "IMAGE", uid: "image" },
     { name: "TITLE", uid: "title" },
     { name: "EXCERPT", uid: "excerpt" },
     { name: "AUTHOR", uid: "author" },

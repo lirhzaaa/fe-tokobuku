@@ -1,18 +1,23 @@
-import { ReactNode } from "react";
-
 interface IBlog {
-  _id?: string
-  title: string;
-  slug: string;
-  excerpt: string;
-  coverImage: string;
-  content: ReactNode;
-  tags: string[];
-  author: string;
-  isActive: string;
-  isFeatured: string;
-  views: number;
+  _id?: string;
+  title?: string;
+  slug?: string | undefined;
+  excerpt?: string;
+  image?: string | FileList;
+  content?: string;
+  tags?: string[];
+  author?:
+    | string
+    | {
+        _id?: string;
+        name?: string;
+        email?: string;
+      };
+  isActive?: string;
+  isFeatured?: string;
+  views?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
-
-export {IBlog}
+export { IBlog };

@@ -9,6 +9,8 @@ import DropdownAction from "@/src/components/common/DropdownAction"
 import useChangeUrl from "@/src/hooks/useChangeUrl"
 import useBlog from "./useBlog"
 import { COLUMN_LISTS_BLOG } from "./Blog.constans"
+import DeleteBlog from "./DeleteBlog"
+import AddBlog from "./AddBlog/AddBlog"
 
 const Blog = () => {
     const router = useRouter();
@@ -24,7 +26,7 @@ const Blog = () => {
 
     const addBlog = useDisclosure()
     const deleteBlog = useDisclosure()
-    const { setURL } = useChangeUrl() 
+    const { setURL } = useChangeUrl()
 
     useEffect(() => {
         setURL();
@@ -37,6 +39,12 @@ const Blog = () => {
                 case "image":
                     return (
                         <Image src={`${cellValue}`} alt="image" width={100} height={150} className="rounded-lg" />
+                    )
+                case "excerpt":
+                    const excerptText = cellValue as string;
+                    const truncatedText = excerptText.slice(0, 100).concat("...");
+                    return (
+                        <p className="line-clamp-2">{truncatedText}</p>
                     )
                 case "isActive":
                     return (
@@ -75,7 +83,7 @@ const Blog = () => {
                 />
             )}
 
-            {/* <AddBlog
+            <AddBlog
                 {...addBlog}
                 refetchBlog={refetchBlog} />
 
@@ -83,7 +91,7 @@ const Blog = () => {
                 {...deleteBlog}
                 selectedId={selectedId}
                 setSelectedId={setSelectedId}
-                refetchBlog={refetchBlog} /> */}
+                refetchBlog={refetchBlog} />
         </section>
     )
 }

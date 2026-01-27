@@ -99,7 +99,7 @@ const useAddBook = () => {
         onSuccess: () => {
             addToast({
                 title: "Success",
-                description: "Success add Banner",
+                description: "Success add Book",
                 color: "success"
             })
             reset()
