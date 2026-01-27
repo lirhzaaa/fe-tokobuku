@@ -1,5 +1,6 @@
 import { LIMIT_BANNER, LIMIT_BOOK, LIMIT_DEFAULT, PAGE_DEFAULT } from "@/src/constants/list.constants"
 import BannerService from "@/src/services/banner.service"
+import BlogService from "@/src/services/blog.service"
 import BookService from "@/src/services/book.service"
 import CategoryService from "@/src/services/category.service"
 import { useQuery } from "@tanstack/react-query"
@@ -55,14 +56,33 @@ const useHome = () => {
         enabled: true
     })
 
+    const getBlog = async (params: string) => {
+        const result = await BlogService.findBlog(params)
+        const { data } = result
+        return data
+    }
+
+    const {
+        data: dataBlog,
+        isLoading: isLoadingBlog
+    } = useQuery({
+        queryKey: ["Blogs"],
+        queryFn: () => getBlog(
+            `limit=${LIMIT_DEFAULT}&page=${PAGE_DEFAULT}`
+        ),
+        enabled: true
+    })
+
     return {
         dataBanner,
         dataFeaturedBook,
         dataCategory,
+        dataBlog,
 
         isLoadingBanner,
         isLoadingFeaturedBook,
-        isLoadingCategory
+        isLoadingCategory,
+        isLoadingBlog
     }
 }
 

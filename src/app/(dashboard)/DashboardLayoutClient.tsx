@@ -7,13 +7,14 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Input,
   Navbar,
   NavbarContent,
-  NavbarMenuToggle,
 } from "@heroui/react"
 import { usePathname } from "next/navigation"
 import { SIDEBAR_ADMIN, SIDEBAR_USER } from "../../constants/DashboardLayout.constants"
 import DashboardLayoutSidebar from "@/src/components/layouts/DashboardLayoutSidebar"
+import { SearchIcon } from "lucide-react"
 
 export default function DashboardLayoutClient({
   children,
@@ -26,18 +27,27 @@ export default function DashboardLayoutClient({
 
   return (
     <Fragment>
-      <div className="max-w-screen-2xl 2xl:container flex">
+      <div className="flex">
         <DashboardLayoutSidebar
           sidebarItems={isAdmin ? SIDEBAR_ADMIN : SIDEBAR_USER}
           isOpen={open}
         />
 
         <div className="h-screen w-full overflow-y-auto">
-          <Navbar className="border-b border-default-200" position="static" maxWidth="full">
+          <Navbar className="border-b border-default-200" position="sticky" maxWidth="full">
             <NavbarContent justify="start">
-              <NavbarMenuToggle
-                aria-label={open ? "Close Menu" : "Open Menu"}
-                onClick={() => setOpen(!open)}
+              <Input
+                classNames={{
+                  base: "max-w-full sm:max-w-[20rem] h-10",
+                  mainWrapper: "h-full",
+                  input: "text-small",
+                  inputWrapper:
+                    "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                }}
+                placeholder="Type to search..."
+                size="sm"
+                startContent={<SearchIcon size={18} />}
+                type="search"
               />
             </NavbarContent>
 
@@ -69,7 +79,13 @@ export default function DashboardLayoutClient({
             </NavbarContent>
           </Navbar>
 
-          <div className="p-5">{children}</div>
+          <main className="p-5">
+            {children}
+          </main>
+
+          <footer className="border-t border-default-200 px-5 py-3 text-sm text-default-500">
+            © {new Date().getFullYear()} My Dashboard. All rights reserved.
+          </footer>
         </div>
       </div>
     </Fragment>
