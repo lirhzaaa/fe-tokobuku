@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 interface IBlog {
+  _id?: string
   title: string;
   slug: string;
   excerpt: string;

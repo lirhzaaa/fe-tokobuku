@@ -36,9 +36,9 @@ const DashboardLayoutSidebar = (props: PropsTypes) => {
                 </div>
                 <Listbox items={sidebarItems} variant="solid" className="p-0">
                     {(item) => (
-                        <ListboxItem key={item.key} className={cn("h-12 mb-2 text-2xl transition-all duration-300", {
-                            "bg-primary text-white": pathname.startsWith(item.href)
-                        })}
+                        <ListboxItem
+                            key={item.key}
+                            className={cn("h-12 mb-2 text-2xl transition-all duration-300", { "bg-primary text-white": pathname === item.href })}
                             startContent={item.icon}
                             aria-describedby={item.label}
                             as={Link}

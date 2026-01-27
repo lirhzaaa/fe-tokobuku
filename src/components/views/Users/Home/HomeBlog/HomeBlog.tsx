@@ -12,7 +12,7 @@ interface IHomeBlog {
 }
 
 const HomeBlog = (props: IHomeBlog) => {
-    const { title, subtitle, urlMore = "/blog", isLoadingBlog } = props
+    const { blogs, title, subtitle, urlMore = "/blog", isLoadingBlog } = props
 
     return (
         <section className="w-full">
@@ -25,15 +25,24 @@ const HomeBlog = (props: IHomeBlog) => {
                     Lihat Artikel Lainnya
                 </Link>
             </div>
-            {!isLoadingBlog ? (
-                <CardBlog />
-            ) : (
-                Array.from({ length: 3 }).map((_, index) => (
-                    <div key={index} className="flex">
-                        <CardBlog isLoading className="w-full h-full" />
-                    </div>
-                ))
-            )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {isLoadingBlog
+                    ? Array.from({ length: 3 }).map((_, index) => (
+                        <CardBlog
+                            key={index}
+                            isLoading
+                            className="w-full"
+                        />
+                    ))
+                    : blogs?.map((blog) => (
+                        <CardBlog
+                            key={blog._id}
+                            blog={blog}
+                            className="w-full"
+                        />
+                    ))
+                }
+            </div>
         </section>
     )
 }

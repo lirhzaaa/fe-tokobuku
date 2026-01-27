@@ -10,6 +10,7 @@ import {
   Input,
   Navbar,
   NavbarContent,
+  NavbarMenuToggle,
 } from "@heroui/react"
 import { usePathname } from "next/navigation"
 import { SIDEBAR_ADMIN, SIDEBAR_USER } from "../../constants/DashboardLayout.constants"
@@ -42,40 +43,49 @@ export default function DashboardLayoutClient({
                   mainWrapper: "h-full",
                   input: "text-small",
                   inputWrapper:
-                    "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                    "h-full font-normal text-default-400 placeholder:text-default-500",
                 }}
-                placeholder="Type to search..."
+                placeholder="Search your favorite book..."
                 size="sm"
                 startContent={<SearchIcon size={18} />}
                 type="search"
               />
             </NavbarContent>
 
-            <NavbarContent justify="end">
-              <Dropdown placement="bottom-end">
-                <DropdownTrigger>
-                  <Avatar
-                    isBordered
-                    as="button"
-                    className="transition-transform cursor-pointer"
-                    color="primary"
-                    name="Jason Hughes"
-                    size="sm"
-                    src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                  />
-                </DropdownTrigger>
+            <NavbarContent justify="end" className="items-center gap-2">
+              <div className="hidden md:flex">
+                <Dropdown placement="bottom-end">
+                  <DropdownTrigger>
+                    <Avatar
+                      isBordered
+                      as="button"
+                      className="transition-transform cursor-pointer"
+                      color="primary"
+                      name="Jason Hughes"
+                      size="sm"
+                      src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                    />
+                  </DropdownTrigger>
 
-                <DropdownMenu aria-label="Profile Actions" variant="flat">
-                  <DropdownItem key="profile" className="h-12 gap-2">
-                    <p className="font-semibold">azhril@example.com</p>
-                  </DropdownItem>
-                  <DropdownItem key="profile">Profile</DropdownItem>
-                  <DropdownItem key="settings">Settings</DropdownItem>
-                  <DropdownItem key="logout" color="primary">
-                    Log Out
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+                  <DropdownMenu aria-label="Profile Actions" variant="flat">
+                    <DropdownItem key="email" className="h-12 gap-2">
+                      <p className="font-semibold">azhril@example.com</p>
+                    </DropdownItem>
+                    <DropdownItem key="profile" href="/profile">Profile</DropdownItem>
+                    <DropdownItem key="settings">Settings</DropdownItem>
+                    <DropdownItem key="logout" color="primary">
+                      Log Out
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+
+              <div className="md:hidden">
+                <NavbarMenuToggle
+                  aria-label={open ? "Close Menu" : "Open Menu"}
+                  onClick={() => setOpen(!open)}
+                />
+              </div>
             </NavbarContent>
           </Navbar>
 

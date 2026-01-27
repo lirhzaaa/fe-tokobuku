@@ -8,10 +8,10 @@ const SIDEBAR_ADMIN = [
         icon: <LayoutDashboard />
     },
     {
-        key: "book",
-        label: "Book",
-        href: "/admin/book",
-        icon: <BookText />
+        key: "banner",
+        label: "Banner",
+        href: "/admin/banner",
+        icon: <Bookmark />
     },
     {
         key: "category",
@@ -20,10 +20,16 @@ const SIDEBAR_ADMIN = [
         icon: <Tags />
     },
     {
-        key: "banner",
-        label: "Banner",
-        href: "/admin/banner",
-        icon: <Bookmark />
+        key: "book",
+        label: "Book",
+        href: "/admin/book",
+        icon: <BookText />
+    },
+    {
+        key: "blog",
+        label: "Blog",
+        href: "/admin/blog",
+        icon: <Newspaper />
     },
     {
         key: "transaction",

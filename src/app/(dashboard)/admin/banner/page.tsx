@@ -4,7 +4,7 @@ import Banner from "@/src/components/views/Admin/Banner";
 import { Spinner } from "@heroui/react";
 import { Suspense } from "react";
 
-const CategoryPage = () => {
+const BannerPageAdmin = () => {
     return (
         <Suspense fallback={<Spinner color="primary" size="sm" className="mx-auto mt-4" />}>
             <Banner />
@@ -12,4 +12,4 @@ const CategoryPage = () => {
     )
 };
 
-export default CategoryPage;
+export default BannerPageAdmin;

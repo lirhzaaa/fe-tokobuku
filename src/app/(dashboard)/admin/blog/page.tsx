@@ -1,14 +1,15 @@
 "use client"
 
-import Book from "@/src/components/views/Admin/Book"
+import Blog from "@/src/components/views/Admin/Blog"
 import { Spinner } from "@heroui/react"
 import { Suspense } from "react"
 
-const BookPageAdmin = () => {
+const BlogPageAdmin = () => {
     return (
         <Suspense fallback={<Spinner color="primary" size="sm" className="mx-auto mt-4" />}>
-            <Book />
-        </Suspense>)
+            <Blog />
+        </Suspense>
+    )
 }
 
-export default BookPageAdmin
+export default BlogPageAdmin
