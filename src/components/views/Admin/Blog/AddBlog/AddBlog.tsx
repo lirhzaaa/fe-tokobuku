@@ -5,6 +5,7 @@ import { Controller } from "react-hook-form"
 import { useEffect, useState } from "react"
 import useAddBlog from "./useAddBlog"
 import InputFile from "@/src/components/ui/InputFile"
+import RichTextEditor from "@/src/components/ui/RichTextEditor"
 
 interface IAddBlog {
     isOpen: boolean
@@ -124,16 +125,13 @@ const AddBlog = (props: IAddBlog) => {
                             <Controller
                                 name="content"
                                 control={control}
-                                render={({ field }) => (
-                                    <Textarea
-                                        {...field}
-                                        label="Content (HTML supported)"
-                                        placeholder="Enter blog content here..."
-                                        variant="bordered"
+                                render={({ field: { onChange, value } }) => (
+                                    <RichTextEditor
+                                        value={value}
+                                        onChange={onChange}
+                                        placeholder="Write your blog content here..."
                                         isInvalid={!!errors.content}
                                         errorMessage={errors.content?.message}
-                                        minRows={8}
-                                        description="You can use HTML tags for formatting"
                                     />
                                 )}
                             />

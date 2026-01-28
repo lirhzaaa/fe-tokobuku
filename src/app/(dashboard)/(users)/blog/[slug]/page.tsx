@@ -6,7 +6,7 @@ const DetailBlogPage = async ({
   params: Promise<{ slug: string }>
 }) => {
   const { slug } = await params
-  return <DetailBlogClientPage slug={slug} />
+  return <DetailBlogClientPage />
 }
 
 export default DetailBlogPage

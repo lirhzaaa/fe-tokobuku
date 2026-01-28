@@ -71,6 +71,9 @@ export default function DashboardLayoutClient({
                     <DropdownItem key="email" className="h-12 gap-2">
                       <p className="font-semibold">azhril@example.com</p>
                     </DropdownItem>
+                    {!isAdmin ? (
+                      <DropdownItem key="admin" href="/admin">Admin</DropdownItem>
+                    ) : null}
                     <DropdownItem key="profile" href="/profile">Profile</DropdownItem>
                     <DropdownItem key="settings">Settings</DropdownItem>
                     <DropdownItem key="logout" color="primary">
