@@ -14,4 +14,13 @@ interface IBook {
   isFeatured: string;
 }
 
-export { IBook};
+interface IBookCard {
+  title?: string;
+  subtitle?: string;
+  books?: IBook[];
+  categories?: ICategory[];
+  isLoading?: boolean;
+  urlMore?: string;
+}
+
+export { IBook, IBookCard };

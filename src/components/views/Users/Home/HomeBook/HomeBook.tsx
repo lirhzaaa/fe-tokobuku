@@ -2,21 +2,11 @@
 
 import { Fragment, useEffect, useRef, useState } from "react"
 import CardBook from "@/src/components/ui/CardBook"
-import { IBook } from "@/src/types/Book"
-import { ICategory } from "@/src/types/Category"
 import Link from "next/link"
 import { Skeleton } from "@heroui/react"
+import { IBookCard } from "@/src/types/Book"
 
-interface IHomeBook {
-    title: string
-    subtitle?: string
-    books: IBook[]
-    categories: ICategory[]
-    isLoading: boolean
-    urlMore?: string
-}
-
-const HomeBook = (props: IHomeBook) => {
+const HomeBook = (props: IBookCard) => {
     const { title, subtitle, books = [], categories = [], isLoading, urlMore = "/book" } = props
     const shouldShowLoading = isLoading || books.length === 0 || categories.length === 0
     const scrollRef = useRef<HTMLDivElement>(null)

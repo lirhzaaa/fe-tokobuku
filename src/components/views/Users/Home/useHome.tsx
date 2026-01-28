@@ -34,7 +34,7 @@ const useHome = () => {
     } = useQuery({
         queryKey: ["FeaturedBook"],
         queryFn: () => getBook(
-            `isPublish=true&isFeatured=true`
+            `isActive=true&isFeatured=true`
         ),
         enabled: true
     })

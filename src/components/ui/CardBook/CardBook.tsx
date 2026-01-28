@@ -17,7 +17,7 @@ const CardBook = (props: ICardBook) => {
     const { book, category, className, isLoading } = props
 
     return (
-        <Card shadow="sm" className={cn(className, "relative col-span-12 sm:col-span-4 h-[300px] cursor-pointer overflow-hidden")}>
+        <Card shadow="sm" className={cn(className, "relative h-75 w-50 cursor-pointer overflow-hidden")}>
             {isLoading ? (
                 <Skeleton className="w-full h-full" />
             ) : (
