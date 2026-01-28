@@ -1,13 +1,15 @@
-import instance from "../lib/axios/instance"
-import { IBlog } from "../types/Blog"
-import ENDPOINT from "./endpoint"
+import instance from "../lib/axios/instance";
+import { IBlog } from "../types/Blog";
+import ENDPOINT from "./endpoint";
 
 const BlogService = {
-    addBlog: (payload: IBlog) => instance.post(`${ENDPOINT.BLOG}`, payload),
-    findBlog: (params?: string) => instance.get(`${ENDPOINT.BLOG}?${params}`),
-    findBySlug: (slug: string) => instance.get(`${ENDPOINT.BLOG}/slug/${slug}`),
-    findOne: (id: string) => instance.get(`${ENDPOINT.BLOG}/${id}`),
-    deleteBlog: (id: string) => instance.delete(`${ENDPOINT.BLOG}/${id}`),
-}
+  addBlog: (payload: IBlog) => instance.post(`${ENDPOINT.BLOG}`, payload),
+  findBlog: (params?: string) => instance.get(`${ENDPOINT.BLOG}?${params}`),
+  findBySlug: (slug: string) => instance.get(`${ENDPOINT.BLOG}/slug/${slug}`),
+  findOne: (id: string) => instance.get(`${ENDPOINT.BLOG}/${id}`),
+  updateBlog: (id: string, payload: Partial<IBlog>) =>
+    instance.put(`${ENDPOINT.BLOG}/${id}`, payload),
+  deleteBlog: (id: string) => instance.delete(`${ENDPOINT.BLOG}/${id}`),
+};
 
-export default BlogService
+export default BlogService;

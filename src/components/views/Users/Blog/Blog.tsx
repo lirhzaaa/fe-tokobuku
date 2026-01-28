@@ -11,8 +11,6 @@ const Blog = () => {
         isLoadingBlog
     } = useBlog()
 
-    console.log("DATA BLOG USERS", dataBlog?.data)
-
     return (
         <Fragment>
             <div className="flex flex-col gap-1 mb-7">

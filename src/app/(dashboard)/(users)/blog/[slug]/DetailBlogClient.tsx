@@ -1,11 +1,9 @@
 "use client"
 
-interface IDetailBlog {
-  slug: string
-}
+import DetailBlog from "@/src/components/views/Users/Blog/DetailBlog"
 
-const DetailBlogClientPage = ({ slug }: IDetailBlog) => {
-  return <h1>Detail Blog {slug}</h1>
+const DetailBlogClientPage = () => {
+  return <DetailBlog />
 }
 
 export default DetailBlogClientPage
