@@ -4,6 +4,7 @@ import { IBook } from "@/src/types/Book"
 import { cn } from "@/src/utils/cn"
 import { Card, CardHeader, Skeleton } from "@heroui/react"
 import Image from "next/image"
+import Link from "next/link"
 import { Fragment } from "react/jsx-runtime"
 
 interface ICardBook {
@@ -11,13 +12,20 @@ interface ICardBook {
     category?: string
     className?: string
     isLoading?: boolean
+    onClick?: () => void
 }
 
 const CardBook = (props: ICardBook) => {
-    const { book, category, className, isLoading } = props
+    const { book, category, className, isLoading, onClick } = props
 
     return (
-        <Card shadow="sm" className={cn(className, "relative h-75 w-50 cursor-pointer overflow-hidden")}>
+        <Card
+            className={cn(className, "relative h-75 w-50 cursor-pointer overflow-hidden")}
+            shadow="sm"
+            onPress={onClick}
+            as={Link}
+            href={isLoading ? "#" : `/book/${book?._id}`}
+        >
             {isLoading ? (
                 <Skeleton className="w-full h-full" />
             ) : (
