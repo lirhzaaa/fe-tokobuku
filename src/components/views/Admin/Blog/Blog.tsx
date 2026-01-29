@@ -46,7 +46,7 @@ const Blog = () => {
                     return (
                         <p className="line-clamp-2">{truncatedText}</p>
                     )
-                case "isPublish":
+                case "isActive":
                     return (
                         <Chip color={cellValue ? "success" : "warning"} size="sm" variant="flat">
                             {cellValue === true ? "Publish" : "Pending"}

@@ -49,13 +49,13 @@ const AddCategory = (props: IAddCategory) => {
                             <Controller name="description" control={control} render={({ field }) => (
                                 <Textarea {...field} label="Description" variant="bordered" isInvalid={errors.description !== undefined} errorMessage={errors.description?.message} />
                             )} />
-                            <Controller name="isPublish" control={control} render={({ field }) => (
+                            <Controller name="isActive" control={control} render={({ field }) => (
                                 <Select
                                     {...field}
                                     label="Status"
                                     variant="bordered"
-                                    isInvalid={errors.isPublish !== undefined}
-                                    errorMessage={errors.isPublish?.message}
+                                    isInvalid={errors.isActive !== undefined}
+                                    errorMessage={errors.isActive?.message}
                                     disallowEmptySelection>
                                     <SelectItem key="true" textValue="Active">Active</SelectItem>
                                     <SelectItem key="false" textValue="Pending">Pending</SelectItem>

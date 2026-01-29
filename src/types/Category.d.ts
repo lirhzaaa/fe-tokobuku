@@ -2,7 +2,7 @@ interface ICategory {
   _id?: string;
   name?: string;
   description?: string;
-  isPublish: boolean | string
+  isActive: boolean | string
 }
 
 export { ICategory };

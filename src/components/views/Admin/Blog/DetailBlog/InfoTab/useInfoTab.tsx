@@ -8,7 +8,7 @@ export interface BlogInfoFormValues {
     excerpt: string
     author: string
     tags: string[]
-    isPublish: string
+    isActive: string
     isFeatured: string
 }
 
@@ -23,7 +23,7 @@ const schemaUpdateInformation = Yup.object().shape({
         .of(Yup.string().required())
         .min(1, "Please input at least one tag")
         .required("Please input tags"),
-    isPublish: Yup.string().required("Please select status"),
+    isActive: Yup.string().required("Please select status"),
     isFeatured: Yup.string().required("Please select featured status"),
 })
 
@@ -42,7 +42,7 @@ const useInfoTab = () => {
             excerpt: "",
             author: "",
             tags: [],
-            isPublish: "false",
+            isActive: "false",
             isFeatured: "false",
         }
     })

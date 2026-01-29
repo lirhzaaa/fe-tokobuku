@@ -6,7 +6,7 @@ const COLUMN_LISTS_BOOK = [
     { name: "CATEGORY", uid: "category" },
     { name: "PRICE", uid: "price" },
     { name: "STOCK", uid: "stock" },
-    { name: "STATUS", uid: "isPublish" },
+    { name: "STATUS", uid: "isActive" },
     { name: "ACTIONS", uid: "actions" },
 ]
 

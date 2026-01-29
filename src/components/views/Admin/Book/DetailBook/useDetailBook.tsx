@@ -59,7 +59,7 @@ const useDetailBook = () => {
             price: data.price,
             stock: data.stock,
             category: data.category,
-            isPublish: data.isPublish,
+            isActive: data.isActive,
             isFeatured: data.isFeatured,
         }
         mutateUpdateBook(payload)

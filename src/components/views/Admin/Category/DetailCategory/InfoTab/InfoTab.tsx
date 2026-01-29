@@ -28,7 +28,7 @@ const InfoTab = (props: IInfoTypes) => {
     useEffect(() => {
         setValueUpdateInformation('name', `${dataCategory?.name}`)
         setValueUpdateInformation('description', `${dataCategory?.description}`)
-        setValueUpdateInformation('isPublish', `${dataCategory?.isPublish}`)
+        setValueUpdateInformation('isActive', `${dataCategory?.isActive}`)
     }, [dataCategory])
 
     useEffect(() => {
@@ -74,7 +74,7 @@ const InfoTab = (props: IInfoTypes) => {
                         )} />
                     </Skeleton>
                     <Skeleton isLoaded={dataCategory !== undefined} className="rounded-lg">
-                        <Controller name="isPublish" control={controlUpdateInformation} render={({ field }) => (
+                        <Controller name="isActive" control={controlUpdateInformation} render={({ field }) => (
                             <Select
                                 {...field}
                                 label="Status"
@@ -82,8 +82,8 @@ const InfoTab = (props: IInfoTypes) => {
                                 labelPlacement="outside"
                                 placeholder="Please Select Status For Category"
                                 disallowEmptySelection
-                                isInvalid={errorsUpdateInformation.isPublish !== undefined}
-                                errorMessage={errorsUpdateInformation.isPublish?.message}
+                                isInvalid={errorsUpdateInformation.isActive !== undefined}
+                                errorMessage={errorsUpdateInformation.isActive?.message}
                                 selectedKeys={field.value ? [field.value] : []}>
                                 <SelectItem key="true" textValue="Active">Active</SelectItem>
                                 <SelectItem key="false" textValue="Pending">Pending</SelectItem>

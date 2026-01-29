@@ -13,7 +13,7 @@ export interface BookFormValues {
     price: string
     stock: string
     category: string
-    isPublish: string
+    isActive: string
     isFeatured: string
 }
 
@@ -25,7 +25,7 @@ const schemaUpdateInformation = Yup.object().shape({
     price: Yup.string().required("Please input price"),
     stock: Yup.string().required("Please input stock"),
     category: Yup.string().required("Please select category"),
-    isPublish: Yup.string().required("Please select status"),
+    isActive: Yup.string().required("Please select status"),
     isFeatured: Yup.string().required("Please select status"),
 })
 
@@ -46,7 +46,7 @@ const useInfoTab = () => {
             price: "",
             stock: "",
             category: "",
-            isPublish: "",
+            isActive: "",
             isFeatured: "",
         }
     })

@@ -10,7 +10,7 @@ interface IBook {
   price: string;
   stock: string;
   category: string | ICategory;
-  isPublish: string;
+  isActive: string;
   isFeatured: string;
 }
 

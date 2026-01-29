@@ -22,7 +22,7 @@ const useBook = () => {
   } = useChangeUrl()
 
   const getBook = async () => {
-    let params = `limit=${currentLimit}&page=${currentPage}&isPublish=true`
+    let params = `limit=${currentLimit}&page=${currentPage}&isActive=true`
 
     if (currentCategory) {
       params += `&category=${currentCategory}`

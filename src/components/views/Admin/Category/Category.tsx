@@ -44,7 +44,7 @@ const Category = () => {
               }}
             />
           )
-        case "isPublish":
+        case "isActive":
           return (
             <Chip color={cellValue ? "success" : "warning"} size="sm" variant="flat">
               {cellValue === true ? "Active" : "Pending"}

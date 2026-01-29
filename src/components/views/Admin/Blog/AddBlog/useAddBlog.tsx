@@ -20,7 +20,7 @@ const schema = Yup.object().shape({
         .min(1, "Please input at least one tag")
         .required("Please input tags"),
     author: Yup.string().defined(),
-    isPublish: Yup.string().required("Please select status"),
+    isActive: Yup.string().required("Please select status"),
     isFeatured: Yup.string().required("Please select featured status"),
 });
 
@@ -54,7 +54,7 @@ const useAddBlog = () => {
             content: "",
             tags: [""],
             author: "",
-            isPublish: "true",
+            isActive: "true",
             isFeatured: "true",
         }
     })

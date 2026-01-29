@@ -13,7 +13,7 @@ interface IBlog {
         name?: string;
         email?: string;
       };
-  isPublish?: string;
+  isActive?: string;
   isFeatured?: string;
   views?: number;
   createdAt?: string;

@@ -57,8 +57,8 @@ export default function DashboardLayoutClient({
                   </DropdownTrigger>
 
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="username" className="h-12 gap-2">
-                      <p className="font-semibold">@{dataProfile?.username}</p>
+                    <DropdownItem key="email" className="h-12 gap-2">
+                      <p className="font-semibold">{dataProfile?.email.slice(0, 7)}</p>
                     </DropdownItem>
                     {!isAdmin ? (
                       <DropdownItem key="admin" href="/admin">Admin</DropdownItem>

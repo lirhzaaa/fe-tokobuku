@@ -30,7 +30,7 @@ const InfoTab = (props: IInfoTypes) => {
             setValueUpdateInformation('excerpt', `${dataBlog.excerpt}`)
             setValueUpdateInformation('author', `${dataBlog.author}`)
             setValueUpdateInformation('tags', dataBlog.tags || [])
-            setValueUpdateInformation('isPublish', `${dataBlog.isPublish}`)
+            setValueUpdateInformation('isActive', `${dataBlog.isActive}`)
             setValueUpdateInformation('isFeatured', `${dataBlog.isFeatured}`)
         }
     }, [dataBlog, setValueUpdateInformation])
@@ -171,9 +171,9 @@ const InfoTab = (props: IInfoTypes) => {
                         />
                     </Skeleton>
 
-                    <Skeleton isLoaded={dataBlog?.isPublish !== undefined} className="rounded-lg">
+                    <Skeleton isLoaded={dataBlog?.isActive !== undefined} className="rounded-lg">
                         <Controller
-                            name="isPublish"
+                            name="isActive"
                             control={controlUpdateInformation}
                             render={({ field: { onChange, value, ...field } }) => (
                                 <Select
@@ -188,8 +188,8 @@ const InfoTab = (props: IInfoTypes) => {
                                         onChange(selected === "true")
                                     }}
                                     disallowEmptySelection
-                                    isInvalid={!!errorsUpdateInformation.isPublish}
-                                    errorMessage={errorsUpdateInformation.isPublish?.message}
+                                    isInvalid={!!errorsUpdateInformation.isActive}
+                                    errorMessage={errorsUpdateInformation.isActive?.message}
                                 >
                                     <SelectItem key="true">Published</SelectItem>
                                     <SelectItem key="false">Draft</SelectItem>
