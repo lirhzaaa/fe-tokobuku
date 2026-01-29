@@ -18,6 +18,23 @@ interface ILogin {
   password: string;
 }
 
+interface IProfile {
+  _id?: string
+  email?: string
+  fullName?: string
+  username?: string
+  isActive?: boolean
+  profilePicture?: string | FileList
+  role?: string
+}
+
+interface ISecurity {
+  _id?: string
+  oldPassword?: string
+  password?: string
+  confirmPassword?: string
+}
+
 interface UserExtended extends User {
   accessToken?: string;
   role?: string;
@@ -35,6 +52,8 @@ export type {
   IRegister,
   IActivation,
   ILogin,
+  IProfile,
+  ISecurity,
   UserExtended,
   SessionExtended,
   JWTExtended,

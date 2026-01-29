@@ -1,5 +1,5 @@
 import instance from "../lib/axios/instance";
-import { IActivation, ILogin, IRegister } from "../types/Auth";
+import { IActivation, ILogin, IProfile, IRegister, ISecurity } from "../types/Auth";
 import ENDPOINT from "./endpoint";
 
 const AuthService = {
@@ -16,6 +16,8 @@ const AuthService = {
       },
     }),
   findProfile: () => instance.get(`${ENDPOINT.AUTH}/me`),
+  updateProfile: (payload: IProfile) => instance.patch(`${ENDPOINT.AUTH}/profile`, payload),
+  updatePassword: (payload: ISecurity) => instance.patch(`${ENDPOINT.AUTH}/password`, payload),
 };
 
 export default AuthService;

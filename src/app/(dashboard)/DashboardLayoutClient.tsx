@@ -14,6 +14,8 @@ import {
 import { usePathname } from "next/navigation"
 import { SIDEBAR_ADMIN, SIDEBAR_USER } from "../../constants/DashboardLayout.constants"
 import DashboardLayoutSidebar from "@/src/components/layouts/DashboardLayoutSidebar"
+import useDashboardLayoutClient from "./useDashboardLayoutClient"
+import { signOut } from "next-auth/react"
 
 export default function DashboardLayoutClient({
   children,
@@ -23,6 +25,10 @@ export default function DashboardLayoutClient({
   const pathname = usePathname()
   const isAdmin = pathname.startsWith("/admin")
   const [open, setOpen] = useState(false)
+
+  const {
+    dataProfile
+  } = useDashboardLayoutClient()
 
   return (
     <Fragment>
@@ -43,22 +49,22 @@ export default function DashboardLayoutClient({
                       as="button"
                       className="transition-transform cursor-pointer"
                       color="primary"
-                      name="Jason Hughes"
                       size="sm"
-                      src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                      name={dataProfile?.username}
+                      src={dataProfile?.profilePicture}
+                      showFallback
                     />
                   </DropdownTrigger>
 
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="email" className="h-12 gap-2">
-                      <p className="font-semibold">azhril@example.com</p>
+                    <DropdownItem key="username" className="h-12 gap-2">
+                      <p className="font-semibold">@{dataProfile?.username}</p>
                     </DropdownItem>
                     {!isAdmin ? (
                       <DropdownItem key="admin" href="/admin">Admin</DropdownItem>
                     ) : null}
                     <DropdownItem key="profile" href="/profile">Profile</DropdownItem>
-                    <DropdownItem key="settings">Settings</DropdownItem>
-                    <DropdownItem key="logout" color="primary">
+                    <DropdownItem key="logout" color="primary" onPress={() => signOut()}>
                       Log Out
                     </DropdownItem>
                   </DropdownMenu>
