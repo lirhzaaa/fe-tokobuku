@@ -15,7 +15,9 @@ const Book = () => {
         dataBook,
         isLoadingBook,
         isRefetchingBook,
-        refetchBook
+        refetchBook,
+        handleSearch,
+        handleClearSearch,
     } = useBook()
 
     useEffect(() => {
@@ -30,22 +32,21 @@ const Book = () => {
                     <p className="text-sm text-gray-600">Temukan buku yang kamu cari!!!</p>
                 </div>
                 <div className="flex items-center justify-between gap-10">
-                    {!isLoadingBook ? (
-                        <Input
-                            classNames={{
-                                mainWrapper: "h-full",
-                                input: "text-small",
-                                inputWrapper:
-                                    "h-10 font-normal text-default-400 placeholder:text-default-500",
-                            }}
-                            placeholder="Search your favorite book..."
-                            size="lg"
-                            startContent={<SearchIcon size={18} />}
-                            type="search"
-                        />
-                    ) : (
-                        <Skeleton className="w-full h-14 rounded-lg" />
-                    )}
+                    <Input
+                        classNames={{
+                            mainWrapper: "h-full",
+                            input: "text-small",
+                            inputWrapper:
+                                "h-10 font-normal text-default-400 placeholder:text-default-500",
+                        }}
+                        isClearable
+                        placeholder="Search your favorite book..."
+                        size="lg"
+                        startContent={<SearchIcon size={18} />}
+                        type="search"
+                        onChange={handleSearch}
+                        onClear={handleClearSearch}
+                    />
                     <FilterBook />
                 </div>
             </div>

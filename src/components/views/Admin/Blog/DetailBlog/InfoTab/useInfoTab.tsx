@@ -6,7 +6,7 @@ export interface BlogInfoFormValues {
     title: string
     slug: string
     excerpt: string
-    author?: string
+    author: string
     tags: string[]
     isPublish: string
     isFeatured: string
@@ -18,7 +18,7 @@ const schemaUpdateInformation = Yup.object().shape({
         .required("Please input slug")
         .matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be lowercase with hyphens"),
     excerpt: Yup.string().required("Please input excerpt").min(10).max(300),
-    author: Yup.string().defined(),
+    author: Yup.string().required().default(""),
     tags: Yup.array()
         .of(Yup.string().required())
         .min(1, "Please input at least one tag")

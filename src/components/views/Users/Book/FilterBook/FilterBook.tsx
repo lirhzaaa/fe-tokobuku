@@ -25,7 +25,7 @@ const FilterBook = () => {
     }, [isSuccessCategory])
 
     if (!isSuccessCategory) {
-        return <Skeleton className="w-[220px] h-14 rounded-xl" />
+        return <Skeleton className="w-55 h-14 rounded-xl" />
     }
 
     return (
