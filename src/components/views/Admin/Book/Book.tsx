@@ -55,7 +55,7 @@ const Book = () => {
                     return category.name
                 case "price":
                     return `${convertIDR(cellValue as number)}`
-                case "isActive":
+                case "isPublish":
                     return (
                         <Chip color={cellValue ? "success" : "warning"} size="sm" variant="flat">
                             {cellValue === true ? "Publish" : "Pending"}

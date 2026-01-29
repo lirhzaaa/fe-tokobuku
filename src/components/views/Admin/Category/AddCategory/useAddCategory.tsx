@@ -11,13 +11,13 @@ import * as Yup from "yup"
 type CategoryForm = {
     name: string
     description: string
-    isActive: string
+    isPublish: string
 }
 
 const schema = Yup.object().shape({
     name: Yup.string().required("Please input name"),
     description: Yup.string().required("Please input description"),
-    isActive: Yup.string().required("Please select status"),
+    isPublish: Yup.string().required("Please select status"),
 })
 
 const useAddCategory = () => {
@@ -28,7 +28,7 @@ const useAddCategory = () => {
         defaultValues: {
             name: "",
             description: "",
-            isActive: "true"
+            isPublish: "true"
         }
     })
 
@@ -58,7 +58,7 @@ const useAddCategory = () => {
     const handleAddCategory = (data: CategoryForm) => {
         const payload: ICategory = {
             ...data,
-            isActive: data.isActive === "true"
+            isPublish: data.isPublish === "true"
         }
         mutateAddCategory(payload)
     }

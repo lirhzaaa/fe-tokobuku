@@ -7,7 +7,6 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Input,
   Navbar,
   NavbarContent,
   NavbarMenuToggle,
@@ -15,7 +14,6 @@ import {
 import { usePathname } from "next/navigation"
 import { SIDEBAR_ADMIN, SIDEBAR_USER } from "../../constants/DashboardLayout.constants"
 import DashboardLayoutSidebar from "@/src/components/layouts/DashboardLayoutSidebar"
-import { SearchIcon } from "lucide-react"
 
 export default function DashboardLayoutClient({
   children,
@@ -36,22 +34,6 @@ export default function DashboardLayoutClient({
 
         <div className="h-screen w-full overflow-y-auto">
           <Navbar className="border-b border-default-200" position="sticky" maxWidth="full">
-            <NavbarContent justify="start">
-              <Input
-                classNames={{
-                  base: "max-w-full sm:max-w-[20rem] h-10",
-                  mainWrapper: "h-full",
-                  input: "text-small",
-                  inputWrapper:
-                    "h-full font-normal text-default-400 placeholder:text-default-500",
-                }}
-                placeholder="Search your favorite book..."
-                size="sm"
-                startContent={<SearchIcon size={18} />}
-                type="search"
-              />
-            </NavbarContent>
-
             <NavbarContent justify="end" className="items-center gap-2">
               <div className="hidden md:flex">
                 <Dropdown placement="bottom-end">

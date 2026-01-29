@@ -199,7 +199,7 @@ const AddBlog = (props: IAddBlog) => {
 
                             <p className="text-sm font-bold mt-4">Settings</p>
                             <Controller
-                                name="isActive"
+                                name="isPublish"
                                 control={control}
                                 render={({ field: { onChange, value, ...field } }) => (
                                     <Select
@@ -212,8 +212,8 @@ const AddBlog = (props: IAddBlog) => {
                                             const selected = Array.from(keys)[0]
                                             onChange(selected === "true")
                                         }}
-                                        isInvalid={!!errors.isActive}
-                                        errorMessage={errors.isActive?.message}
+                                        isInvalid={!!errors.isPublish}
+                                        errorMessage={errors.isPublish?.message}
                                         disallowEmptySelection
                                     >
                                         <SelectItem key="true" textValue="true">Published</SelectItem>

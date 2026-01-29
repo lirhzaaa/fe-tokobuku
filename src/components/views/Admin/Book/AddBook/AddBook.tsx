@@ -99,13 +99,13 @@ const AddBook = (props: IAddBook) => {
                                     )}
                                 </Autocomplete>
                             )} />
-                            <Controller name="isActive" control={control} render={({ field }) => (
+                            <Controller name="isPublish" control={control} render={({ field }) => (
                                 <Select
                                     {...field}
                                     label="Status"
                                     variant="bordered"
-                                    isInvalid={errors.isActive !== undefined}
-                                    errorMessage={errors.isActive?.message}
+                                    isInvalid={errors.isPublish !== undefined}
+                                    errorMessage={errors.isPublish?.message}
                                     disallowEmptySelection>
                                     <SelectItem key="true" textValue="Publish">Publish</SelectItem>
                                     <SelectItem key="false" textValue="Pending">Pending</SelectItem>

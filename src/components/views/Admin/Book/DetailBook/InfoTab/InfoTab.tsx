@@ -15,7 +15,7 @@ interface IBookDetail {
     price: string;
     stock: string;
     category: ICategory;
-    isActive: boolean;
+    isPublish: boolean;
     isFeatured: boolean;
 }
 
@@ -49,7 +49,7 @@ const InfoTab = (props: IInfoTypes) => {
             setValueUpdateInformation('price', dataBook.price || '')
             setValueUpdateInformation('stock', dataBook.stock || '')
             setValueUpdateInformation('category', dataBook.category?._id || '')
-            setValueUpdateInformation('isActive', String(dataBook.isActive))
+            setValueUpdateInformation('isPublish', String(dataBook.isPublish))
             setValueUpdateInformation('isFeatured', String(dataBook.isFeatured))
         }
     }, [dataBook, setValueUpdateInformation])
@@ -156,8 +156,8 @@ const InfoTab = (props: IInfoTypes) => {
                             </Autocomplete>
                         )} />
                     </Skeleton>
-                    <Skeleton isLoaded={dataBook?.isActive !== undefined} className="rounded-lg">
-                        <Controller name="isActive" control={controlUpdateInformation} render={({ field }) => (
+                    <Skeleton isLoaded={dataBook?.isPublish !== undefined} className="rounded-lg">
+                        <Controller name="isPublish" control={controlUpdateInformation} render={({ field }) => (
                             <Select
                                 {...field}
                                 label="Status"
@@ -165,9 +165,9 @@ const InfoTab = (props: IInfoTypes) => {
                                 labelPlacement="outside"
                                 placeholder="Please Select Status"
                                 disallowEmptySelection
-                                isInvalid={errorsUpdateInformation.isActive !== undefined}
-                                errorMessage={errorsUpdateInformation.isActive?.message}
-                                defaultSelectedKeys={[String(dataBook?.isActive)]}>
+                                isInvalid={errorsUpdateInformation.isPublish !== undefined}
+                                errorMessage={errorsUpdateInformation.isPublish?.message}
+                                defaultSelectedKeys={[String(dataBook?.isPublish)]}>
                                 <SelectItem key="true" textValue="Publish">Publish</SelectItem>
                                 <SelectItem key="false" textValue="Pending">Pending</SelectItem>
                             </Select>

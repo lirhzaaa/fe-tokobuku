@@ -5,9 +5,13 @@ import BookService from "@/src/services/book.service"
 import { useQuery } from "@tanstack/react-query"
 
 const useBook = () => {
-  const { currentLimit, currentPage, currentSearch } = useChangeUrl();
+  const { currentLimit, currentPage, currentCategory, currentSearch } = useChangeUrl();
   const getBook = async () => {
-    let params = `limit=${currentLimit}&page=${currentPage}&isActive=true`
+    let params = `limit=${currentLimit}&page=${currentPage}&isPublish=true`
+    if (currentCategory) {
+      params += `&category=${currentCategory}`
+    }
+
     if (currentSearch) {
       params += `&search=${currentSearch}`
     }
@@ -18,16 +22,20 @@ const useBook = () => {
 
   const {
     data: dataBook,
-    isLoading: isLoadingBook
+    isLoading: isLoadingBook,
+    isRefetching: isRefetchingBook,
+    refetch: refetchBook
   } = useQuery({
-    queryKey: ["Books", currentLimit, currentPage, currentSearch],
+    queryKey: ["Books", currentLimit, currentPage, currentCategory, currentSearch],
     queryFn: () => getBook(),
     enabled: !!currentLimit && !!currentPage
   })
 
   return {
     dataBook,
-    isLoadingBook
+    isLoadingBook,
+    isRefetchingBook,
+    refetchBook
   }
 }
 
