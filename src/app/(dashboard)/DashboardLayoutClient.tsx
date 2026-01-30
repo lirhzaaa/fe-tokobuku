@@ -38,7 +38,7 @@ export default function DashboardLayoutClient({
           isOpen={open}
         />
 
-        <div className="h-screen w-full overflow-y-auto">
+        <div className="h-screen w-full overflow-y-auto flex flex-col">
           <Navbar className="border-b border-default-200" position="sticky" maxWidth="full">
             <NavbarContent justify="end" className="items-center gap-2">
               <div className="hidden md:flex">
@@ -57,8 +57,8 @@ export default function DashboardLayoutClient({
                   </DropdownTrigger>
 
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="email" className="h-12 gap-2">
-                      <p className="font-semibold">{dataProfile?.email.slice(0, 7)}</p>
+                    <DropdownItem key="username" className="h-12 gap-2">
+                      <p className="font-semibold">@{dataProfile?.username}</p>
                     </DropdownItem>
                     {!isAdmin ? (
                       <DropdownItem key="admin" href="/admin">Admin</DropdownItem>
@@ -80,7 +80,7 @@ export default function DashboardLayoutClient({
             </NavbarContent>
           </Navbar>
 
-          <main className="p-5">
+          <main className="flex-1 p-5">
             {children}
           </main>
 

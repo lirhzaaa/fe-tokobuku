@@ -4,6 +4,7 @@ const ENDPOINT = {
   BANNER: "/banner",
   MEDIA: "/media",  
   BOOK: "/book",
+  CART: "/cart",
   BLOG: "/blog",
 };
 

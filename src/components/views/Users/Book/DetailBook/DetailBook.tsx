@@ -12,13 +12,21 @@ import {
   Button,
   Skeleton
 } from "@heroui/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { COLUMN_LISTS_BOOK_DETAIL } from "./DetailBook.constants"
 import { getBookDetailRows } from "./book-detail-rows"
+import useCart from "../../Cart/useCart"
 
 const DetailBook = () => {
   const { dataBook, isLoadingBook } = useDetailBook()
+  const { handleAddToCart } = useCart()
   const [stock, setStock] = useState(1)
+
+  useEffect(() => {
+    if (dataBook) {
+      console.log("dataBook structure:", dataBook)
+    }
+  }, [dataBook])
 
   if (isLoadingBook) {
     return (
@@ -52,6 +60,10 @@ const DetailBook = () => {
 
   const decreaseStock = () => {
     if (stock > 1) setStock(stock - 1)
+  }
+
+  const onAddToCart = () => {
+    handleAddToCart(dataBook._id, stock)
   }
 
   return (
@@ -126,7 +138,9 @@ const DetailBook = () => {
               color="primary"
               size="lg"
               className="px-8"
-              isDisabled={dataBook.stock < 1}>
+              isDisabled={dataBook.stock < 1}
+              onClick={onAddToCart}
+            >
               Add to Cart
             </Button>
           </div>

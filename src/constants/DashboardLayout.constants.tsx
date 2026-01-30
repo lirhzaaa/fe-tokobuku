@@ -43,7 +43,7 @@ const SIDEBAR_USER = [
     {
         key: "dashboard",
         label: "Dashboard",
-        href: "/",
+        href: "/dashboard",
         icon: <LayoutDashboard />
     },
     {

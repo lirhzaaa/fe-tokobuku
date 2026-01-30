@@ -34,19 +34,31 @@ const DashboardLayoutSidebar = (props: PropsTypes) => {
                 <div className="flex">
                     <Image src="/images/general/logo.png" alt="Logo" width={180} height={60} className="mb-6 w-36 cursor-pointer" onClick={() => router.push("/")} />
                 </div>
-                <Listbox items={sidebarItems} variant="solid" className="p-0">
-                    {(item) => (
-                        <ListboxItem
-                            key={item.key}
-                            className={cn("h-12 mb-2 text-2xl transition-all duration-300", { "bg-primary text-white": pathname === item.href })}
-                            startContent={item.icon}
-                            aria-describedby={item.label}
-                            as={Link}
-                            href={item.href}
-                        >
-                            <p className="text-small">{item.label}</p>
-                        </ListboxItem>
-                    )}
+                <Listbox
+                    items={sidebarItems}
+                    variant="flat"
+                    className="p-0"
+                    key={pathname}>
+                    {(item) => {
+                        const isActive = pathname === item.href
+                        return (
+                            <ListboxItem
+                                key={item.key}
+                                className={cn(
+                                    "h-12 mb-2 transition-all duration-300",
+                                    isActive
+                                        ? "bg-primary text-white data-[hover=true]:bg-primary/90 data-[hover=true]:text-white"
+                                        : "data-[hover=true]:bg-default-100"
+                                )}
+                                startContent={item.icon}
+                                aria-describedby={item.label}
+                                as={Link}
+                                href={item.href}
+                            >
+                                <p className="text-small">{item.label}</p>
+                            </ListboxItem>
+                        )
+                    }}
                 </Listbox>
             </div>
             <div className="flex items-center">
