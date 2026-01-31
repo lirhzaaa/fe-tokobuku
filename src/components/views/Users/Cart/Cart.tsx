@@ -5,6 +5,7 @@ import { Minus, Plus, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { Fragment, useEffect, useRef, useState } from "react"
 import useCart from "./useCart"
+import { convertIDR } from "@/src/utils/currency"
 
 const Cart = () => {
   const {
@@ -148,7 +149,7 @@ const Cart = () => {
                   </div>
 
                   <p className="font-semibold w-32 text-right">
-                    Rp {(qty * item.price).toLocaleString("id-ID")}
+                    {convertIDR(qty * item.price)}
                   </p>
 
                   <button
@@ -172,7 +173,7 @@ const Cart = () => {
             <h5 className="font-bold text-xl">
               Total:{" "}
               <span className="text-primary">
-                Rp {totalPrice.toLocaleString("id-ID")}
+                {convertIDR(totalPrice)}
               </span>
             </h5>
             <Button

@@ -8,8 +8,11 @@ import { Input } from "@heroui/react"
 import { SearchIcon } from "lucide-react"
 import { useEffect } from "react"
 import useChangeUrl from "@/src/hooks/useChangeUrl"
+import { useRouter } from "next/navigation"
+import { LIMIT_BOOK_PAGE } from "@/src/constants/list.constants"
 
 const Book = () => {
+    const router = useRouter()
     const { setExplore } = useChangeUrl()
     const {
         dataBook,
@@ -22,6 +25,16 @@ const Book = () => {
 
     useEffect(() => {
         setExplore()
+
+        setTimeout(() => {
+            const params = new URLSearchParams(window.location.search)
+            params.set("limit", LIMIT_BOOK_PAGE.toString())
+
+            if (!params.get("page")) {
+                params.set("page", "1")
+            }
+            router.replace(`?${params.toString()}`)
+        }, 0)
     }, [])
 
     return (

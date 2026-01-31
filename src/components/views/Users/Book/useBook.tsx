@@ -5,9 +5,9 @@ import BookService from "@/src/services/book.service"
 import { useQuery } from "@tanstack/react-query"
 import { ChangeEvent, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { LIMIT_BOOK_PAGE, PAGE_DEFAULT } from "@/src/constants/list.constants"
 
 const DELAY = 500
-const PAGE_DEFAULT = 1
 
 const useBook = () => {
   const router = useRouter()
@@ -15,14 +15,13 @@ const useBook = () => {
   const debounceRef = useRef<NodeJS.Timeout | null>(null)
 
   const {
-    currentLimit,
     currentPage,
     currentCategory,
     currentSearch,
   } = useChangeUrl()
 
   const getBook = async () => {
-    let params = `limit=${currentLimit}&page=${currentPage}&isActive=true`
+    let params = `limit=${LIMIT_BOOK_PAGE}&page=${currentPage}&isActive=true`
 
     if (currentCategory) {
       params += `&category=${currentCategory}`
@@ -73,13 +72,13 @@ const useBook = () => {
   } = useQuery({
     queryKey: [
       "Books",
-      currentLimit,
+      LIMIT_BOOK_PAGE,
       currentPage,
       currentCategory,
       currentSearch,
     ],
     queryFn: getBook,
-    enabled: !!currentLimit && !!currentPage,
+    enabled: !!LIMIT_BOOK_PAGE && !!currentPage,
   })
 
   return {
