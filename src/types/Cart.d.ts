@@ -12,8 +12,10 @@ interface RemoveFromCart {
   bookId: string;
 }
 
-export {
-    AddToCart,
-    UpdateCart,
-    RemoveFromCart
+interface ICart {
+  book: string;
+  quantity: number
+  price: number
 }
+
+export { AddToCart, UpdateCart, RemoveFromCart, ICart };

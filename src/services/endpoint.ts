@@ -6,6 +6,7 @@ const ENDPOINT = {
   BOOK: "/book",
   CART: "/cart",
   BLOG: "/blog",
+  ORDER: "/orders"
 };
 
 export default ENDPOINT;
