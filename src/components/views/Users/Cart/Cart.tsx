@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Skeleton } from "@heroui/react"
+import { Button, Skeleton, Spinner } from "@heroui/react"
 import { Minus, Plus, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { Fragment, useEffect, useRef, useState } from "react"
@@ -178,9 +178,9 @@ const Cart = () => {
             </h5>
             <Button
               className="bg-primary text-white px-6 py-2 rounded"
-              onClick={handleCheckout}
+              onPress={handleCheckout}
             >
-              Checkout
+              {isLoading ? <Spinner size="md" color="white" /> : "Checkout"}
             </Button>
           </>
         )}
