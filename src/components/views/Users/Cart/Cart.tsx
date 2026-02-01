@@ -6,6 +6,8 @@ import Image from "next/image"
 import { Fragment, useEffect, useRef, useState } from "react"
 import useCart from "./useCart"
 import { convertIDR } from "@/src/utils/currency"
+import Script from "next/script"
+import { environment } from "@/src/config/environment"
 
 const Cart = () => {
   const {
@@ -13,8 +15,9 @@ const Cart = () => {
     totalPrice,
     updateQty,
     removeFromCart,
-    handleCheckout,
     isLoading,
+    mutateCreateOrder,
+    isPendingCreateOrder,
   } = useCart()
 
   const [localQty, setLocalQty] = useState<Record<string, number>>({})
@@ -77,115 +80,119 @@ const Cart = () => {
 
 
   return (
-    <div className="relative p-4">
-      <div className="flex flex-col gap-4 mb-6">
-        <h1 className="text-xl font-bold text-primary">Cart Items</h1>
-      </div>
+    <Fragment>
+      <Script src={environment.MIDTRANS_SNAP_URL} data-client-key={environment.MIDTRANS_CLIENT_KEY} strategy="lazyOnload" />
+      <div className="relative p-4">
+        <div className="flex flex-col gap-4 mb-6">
+          <h1 className="text-xl font-bold text-primary">Cart Items</h1>
+        </div>
 
-      <div className="flex flex-col gap-4 mb-10">
-        {isLoading ? (
-          <Fragment>
-            {[...Array(3)].map((_, i) => (
-              <CartItemSkeleton key={i} />
-            ))}
-          </Fragment>
-        ) : items.length === 0 ? (
-          <div className="py-20 text-center text-gray-500">
-            <p className="text-xl">Your cart is empty</p>
-            <p className="mt-2">Add some books to get started!</p>
-          </div>
-        ) : (
-          items.map((item) => {
-            const qty = localQty[item.book._id] ?? item.quantity
+        <div className="flex flex-col gap-4 mb-10">
+          {isLoading ? (
+            <Fragment>
+              {[...Array(3)].map((_, i) => (
+                <CartItemSkeleton key={i} />
+              ))}
+            </Fragment>
+          ) : items.length === 0 ? (
+            <div className="py-20 text-center text-gray-500">
+              <p className="text-xl">Your cart is empty</p>
+              <p className="mt-2">Add some books to get started!</p>
+            </div>
+          ) : (
+            items.map((item) => {
+              const qty = localQty[item.book._id] ?? item.quantity
 
-            return (
-              <div
-                key={item.book._id}
-                className="flex w-full items-center gap-2"
-              >
-                <div className="flex items-center justify-between p-4 border border-default-200 shadow-sm rounded-lg w-full gap-4">
-                  <Image
-                    src={item.book.image}
-                    alt={item.book.title}
-                    width={80}
-                    height={120}
-                    className="rounded object-cover"
-                  />
+              return (
+                <div
+                  key={item.book._id}
+                  className="flex w-full items-center gap-2"
+                >
+                  <div className="flex items-center justify-between p-4 border border-default-200 shadow-sm rounded-lg w-full gap-4">
+                    <Image
+                      src={item.book.image}
+                      alt={item.book.title}
+                      width={80}
+                      height={120}
+                      className="rounded object-cover"
+                    />
 
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold truncate">
-                      {item.book.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 truncate">
-                      {item.book.author}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold truncate">
+                        {item.book.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 truncate">
+                        {item.book.author}
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Stock: {item.book.stock}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() =>
+                          changeQty(item.book._id, qty - 1)
+                        }
+                        disabled={qty <= 1}
+                        className="p-2 border rounded-full bg-primary hover:bg-transparent text-white hover:text-primary transition-colors duration-300 disabled:opacity-50"
+                      >
+                        <Minus size={10} />
+                      </button>
+
+                      <span className="w-8 text-center">{qty}</span>
+
+                      <button
+                        onClick={() =>
+                          changeQty(item.book._id, qty + 1)
+                        }
+                        disabled={qty >= item.book.stock}
+                        className="p-2 border rounded-full bg-primary hover:bg-transparent text-white hover:text-primary transition-colors duration-300 disabled:opacity-50"
+                      >
+                        <Plus size={10} />
+                      </button>
+                    </div>
+
+                    <p className="font-semibold w-32 text-right">
+                      {convertIDR(qty * item.price)}
                     </p>
-                    <p className="text-sm text-gray-500 mt-1">
-                      Stock: {item.book.stock}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() =>
-                        changeQty(item.book._id, qty - 1)
-                      }
-                      disabled={qty <= 1}
-                      className="p-2 border rounded-full bg-primary hover:bg-transparent text-white hover:text-primary transition-colors duration-300 disabled:opacity-50"
-                    >
-                      <Minus size={10} />
-                    </button>
-
-                    <span className="w-8 text-center">{qty}</span>
 
                     <button
-                      onClick={() =>
-                        changeQty(item.book._id, qty + 1)
-                      }
-                      disabled={qty >= item.book.stock}
-                      className="p-2 border rounded-full bg-primary hover:bg-transparent text-white hover:text-primary transition-colors duration-300 disabled:opacity-50"
-                    >
-                      <Plus size={10} />
+                      onClick={() => removeFromCart(item.book._id)}
+                      className="p-2 text-red-500 hover:bg-red-50 rounded transition-colors"
+                      title="Remove from cart">
+                      <Trash2 size={20} />
                     </button>
                   </div>
-
-                  <p className="font-semibold w-32 text-right">
-                    {convertIDR(qty * item.price)}
-                  </p>
-
-                  <button
-                    onClick={() => removeFromCart(item.book._id)}
-                    className="p-2 text-red-500 hover:bg-red-50 rounded transition-colors"
-                    title="Remove from cart">
-                    <Trash2 size={20} />
-                  </button>
                 </div>
-              </div>
-            )
-          })
-        )}
-      </div>
+              )
+            })
+          )}
+        </div>
 
-      <div className="sticky bottom-0 bg-white p-4 border-t border-default-200 flex justify-between items-center shadow-md">
-        {isLoading ? (
-          <Skeleton className="h-8 w-64" />
-        ) : (
-          <>
-            <h5 className="font-bold text-xl">
-              Total:{" "}
-              <span className="text-primary">
-                {convertIDR(totalPrice)}
-              </span>
-            </h5>
-            <Button
-              className="bg-primary text-white px-6 py-2 rounded"
-              onPress={handleCheckout}
-            >
-              {isLoading ? <Spinner size="md" color="white" /> : "Checkout"}
-            </Button>
-          </>
-        )}
+        <div className="sticky bottom-0 bg-white p-4 border-t border-default-200 flex justify-between items-center shadow-md">
+          {isLoading ? (
+            <Skeleton className="h-8 w-64" />
+          ) : (
+            <>
+              <h5 className="font-bold text-xl">
+                Total:{" "}
+                <span className="text-primary">
+                  {convertIDR(totalPrice)}
+                </span>
+              </h5>
+              <Button
+                className="bg-primary text-white px-6 py-2 rounded"
+                onPress={() => mutateCreateOrder()}
+                isDisabled={isPendingCreateOrder}
+              >
+                {isPendingCreateOrder ? <Spinner size="sm" color="white" /> : "Checkout"}
+              </Button>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </Fragment>
   )
 }
 

@@ -1,11 +1,8 @@
 import instance from "../lib/axios/instance";
-import { ICart } from "../types/Cart";
 import ENDPOINT from "./endpoint";
 
 const orderServices = {
-  createOrder: (payload: ICart) => {
-    return instance.post(`${ENDPOINT.ORDER}`, payload);
-  },
+  createOrder: () => instance.post(`${ENDPOINT.ORDER}`),
   getOrderById: (id: string) => instance.get(`${ENDPOINT.ORDER}/${id}`),
   getUserOrder: (params: string) =>
     instance.get(`${ENDPOINT.ORDER}-history?${params}`),
