@@ -4,6 +4,16 @@ import orderServices from "@/src/services/order.service";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 
+export type HomeChartItem = {
+  date: string
+  value: number
+}
+
+export type HomeStatusItem = {
+  status: string
+  value: number
+}
+
 interface HomeTransaction {
   createdAt?: string;
   date?: string;
@@ -26,48 +36,53 @@ const useHome = () => {
     queryFn: getHomeTransactions,
   });
 
-  const chartData = useMemo(() => {
-    if (!dataTransactions?.data) return [];
+  const chartData = useMemo<HomeChartItem[]>(() => {
+    if (!dataTransactions?.data) return []
 
     const groupedByDate = dataTransactions.data.reduce(
       (acc: Record<string, number>, transaction: HomeTransaction) => {
-        if (!transaction.createdAt && !transaction.date) return acc;
+        if (!transaction.createdAt && !transaction.date) return acc
 
-        const rawDate = transaction.createdAt ?? transaction.date!;
+        const rawDate = transaction.createdAt ?? transaction.date!
         const date = new Date(rawDate).toLocaleDateString("id-ID", {
           day: "2-digit",
           month: "short",
-        });
+        })
 
-        acc[date] = (acc[date] || 0) + (transaction.total ?? 0);
-        return acc;
+        acc[date] = (acc[date] || 0) + (transaction.total ?? 0)
+        return acc
       },
       {}
-    );
+    )
 
-    return Object.entries(groupedByDate).map(([date, value]) => ({
-      date,
-      value,
-    }));
-  }, [dataTransactions]);
+    return (Object.entries(groupedByDate) as [string, number][])
+      .map(([date, value]) => ({
+        date,
+        value,
+      }))
 
-  const statusData = useMemo(() => {
-    if (!dataTransactions?.data) return [];
+  }, [dataTransactions])
+
+
+  const statusData = useMemo<HomeStatusItem[]>(() => {
+    if (!dataTransactions?.data) return []
 
     const groupedByStatus = dataTransactions.data.reduce(
       (acc: Record<string, number>, transaction: HomeTransaction) => {
-        const status = transaction.status ?? "pending";
-        acc[status] = (acc[status] || 0) + (transaction.total ?? 0);
-        return acc;
+        const status = transaction.status ?? "pending"
+        acc[status] = (acc[status] || 0) + (transaction.total ?? 0)
+        return acc
       },
       {}
-    );
+    )
 
-    return Object.entries(groupedByStatus).map(([status, value]) => ({
-      status: status.charAt(0).toUpperCase() + status.slice(1),
-      value,
-    }));
-  }, [dataTransactions]);
+    return (Object.entries(groupedByStatus) as [string, number][])
+      .map(([status, value]) => ({
+        status: status.charAt(0).toUpperCase() + status.slice(1),
+        value,
+      }))
+  }, [dataTransactions])
+
 
   return {
     dataTransactions,
