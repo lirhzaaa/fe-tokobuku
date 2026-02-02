@@ -18,12 +18,20 @@ const registerSchema = yup.object().shape({
     .required("Please input your email"),
   password: yup
     .string()
-    .min(8, "Minimal 8 Characters")
-    .required("Please input your password"),
+    .required("Please input your password")
+    .min(8, "Password must be at least 8 characters")
+    .matches(
+      /[A-Z]/,
+      "Password must contain at least one uppercase letter"
+    )
+    .matches(
+      /[0-9]/,
+      "Password must contain at least one number"
+    ),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), ""], "Password not match")
-    .required("Please input confirm password"),
+    .required("Please input confirm password")
+    .oneOf([yup.ref("password")], "Password does not match"),
 });
 
 const useRegister = () => {
