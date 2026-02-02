@@ -14,14 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://tokobuku-v1.vercel.app/"),
+  metadataBase: new URL("http://tokobukunya.vercel.app/"),
   title: {
     default: "Tokobuku",
     template: `%s | Tokobuku`,
   },
   openGraph: {
     title: "Tokobuku",
-    url: "http://tokobuku-v1.vercel.app/",
+    url: "http://tokobukunya.vercel.app/",
     siteName: "Tokobuku",
     locale: "",
     type: "website",
