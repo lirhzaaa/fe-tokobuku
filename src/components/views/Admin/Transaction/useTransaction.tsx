@@ -29,8 +29,6 @@ const useTransactions = () => {
         enabled: router && !!currentPage && !!currentLimit,
     });
 
-    console.log(dataTransactions)
-
     return {
         dataTransactions,
         isLoadingTransactions,

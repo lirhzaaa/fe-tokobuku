@@ -33,7 +33,6 @@ export default async function ActivationPage({ searchParams }: IProps) {
             status = "failed"
         } else {
             const result = JSON.parse(responseText)
-            console.log("result:", result)
             if (response.ok && result?.data) {
                 status = "success"
             } else {

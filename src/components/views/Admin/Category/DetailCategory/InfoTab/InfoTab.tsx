@@ -15,8 +15,6 @@ interface IInfoTypes {
 
 const InfoTab = (props: IInfoTypes) => {
     const { dataCategory, onUpdate, isPendingUpdateCategory, isSuccessUpdateCategory } = props
-    console.log(dataCategory)
-
     const {
         controlUpdateInformation,
         handleSubmitUpdateInformation,

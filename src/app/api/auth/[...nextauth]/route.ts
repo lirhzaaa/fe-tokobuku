@@ -31,7 +31,7 @@ const authOptions: AuthOptions = {
           user.accessToken = token;
           return user;
         } catch (e) {
-          console.log("LOGIN ERROR:", e);
+          console.log("error:", e);
           return null;
         }
       },
