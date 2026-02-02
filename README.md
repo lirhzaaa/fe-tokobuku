@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tokobuku Frontend Web Application
 
-## Getting Started
+Frontend application for **Tokobuku – Your Smart Library**. This web app provides the user interface for browsing books, managing carts, and completing transactions.
 
-First, run the development server:
+## 🔗 Links
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **Live Website:** [https://tokobukunya.vercel.app/](https://tokobukunya.vercel.app/)
+* **Backend API:** [https://be-tokobuku.vercel.app/](https://be-tokobuku.vercel.app/)
+* **API Documentation (Swagger):** [https://be-tokobuku.vercel.app/api-docs](https://be-tokobuku.vercel.app/api-docs)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The Tokobuku frontend is built using Next.js and communicates with a separate backend API. It focuses on delivering a smooth and responsive user experience for online book shopping.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Users must register and activate their account via email before logging in and accessing platform features.
 
-## Learn More
+## ✨ Main Features
 
-To learn more about Next.js, take a look at the following resources:
+### Public
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Browse books and categories
+* View book details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### User
 
-## Deploy on Vercel
+* Account registration with email activation
+* Login & authentication
+* Persistent shopping cart
+* Checkout and payment via Midtrans
+* View order history
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Admin
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Admin dashboard access
+* Manage books, categories, banners, and blogs
+
+## 🛠 Tech Stack
+
+* Next.js
+* TypeScript
+* Tailwind CSS
+* JWT-based Authentication
+* Yup (Form Validation)
+
+## 📌 Notes
+
+* Frontend and backend are fully separated.
+* Authentication and protected routes are handled on the client side.
+* All data is fetched from REST API endpoints.
+
+## 👤 Author
+
+Developed by **Lirhza**
