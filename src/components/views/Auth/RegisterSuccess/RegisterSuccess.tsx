@@ -13,7 +13,7 @@ const RegisterSuccess = () => {
             </div>
             <div className="flex flex-col items-center justify-center gap-2 mb-4 text-center">
                 <h4 className="text-2xl font-bold text-primary">Create Account Success</h4>
-                <p className="text-md font-semibold text-default-500">Check your email for account activation</p>
+                <p className="text-md font-semibold text-default-500">Check your email in all email or spam for account activation</p>
             </div>
             <Button className="mt-4 w-fit" variant="bordered" color="primary" onPress={() => router.push("/")}>Back To Home</Button>
         </div>
