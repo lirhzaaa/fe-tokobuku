@@ -22,7 +22,6 @@ const Home = () => {
   const books = dataFeaturedBook?.data || []
   const categories = dataCategory?.data || []
 
-  console.log(dataBlog?.data)
   return (
     <Fragment>
       <HomeBanner banners={dataBanner?.data} isLoadingBanner={isLoadingBanner} />

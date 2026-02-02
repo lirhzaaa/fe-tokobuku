@@ -118,7 +118,7 @@ const useCart = () => {
     return data.data
   }
 
-  const { mutate: mutateCreateOrder, isPending: isPendingCreateOrder } =
+  const { mutate: mutateCreateOrder, isPending: isLoadingCreateOrder } =
     useMutation({
       mutationFn: createOrder,
       onError: (error) => {
@@ -129,18 +129,33 @@ const useCart = () => {
         })
       },
       onSuccess: (result) => {
-        queryClient.invalidateQueries({ queryKey: ["cart"] })
-
         if (result.payment?.token) {
-          const transactionToken = result.payment.token
-          window.snap.pay(transactionToken)
+          const transactionToken = result.payment.token;
+          window.snap.pay(transactionToken, {
+            onSuccess: function (result) {
+              router.push(`/payment/success?order_id=${result.order_id}`)
+            },
+            onPending: function (result) {
+              router.push(`/payment/pending?order_id=${result.order_id}`)
+            },
+            onError: function (result) {
+              router.push(`/payment/error?order_id=${result.order_id}`)
+            },
+            onClose: function () {
+              addToast({
+                title: "Cancelled",
+                description: "Payment was cancelled.",
+                color: "warning"
+              })
+            }
+          })
         } else {
           addToast({
             title: "Order Created",
             description: "Your order has been created successfully.",
             color: "success",
           })
-          router.push("/orders")
+          router.push("/transaction")
         }
       },
     })
@@ -169,7 +184,7 @@ const useCart = () => {
     removeFromCart,
 
     mutateCreateOrder,
-    isPendingCreateOrder,
+    isLoadingCreateOrder,
   }
 }
 

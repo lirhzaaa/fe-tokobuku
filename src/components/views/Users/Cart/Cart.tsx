@@ -17,7 +17,7 @@ const Cart = () => {
     removeFromCart,
     isLoading,
     mutateCreateOrder,
-    isPendingCreateOrder,
+    isLoadingCreateOrder,
   } = useCart()
 
   const [localQty, setLocalQty] = useState<Record<string, number>>({})
@@ -160,7 +160,8 @@ const Cart = () => {
                     <button
                       onClick={() => removeFromCart(item.book._id)}
                       className="p-2 text-red-500 hover:bg-red-50 rounded transition-colors"
-                      title="Remove from cart">
+                      title="Remove from cart"
+                    >
                       <Trash2 size={20} />
                     </button>
                   </div>
@@ -184,9 +185,9 @@ const Cart = () => {
               <Button
                 className="bg-primary text-white px-6 py-2 rounded"
                 onPress={() => mutateCreateOrder()}
-                isDisabled={isPendingCreateOrder}
+                isDisabled={isLoadingCreateOrder}
               >
-                {isPendingCreateOrder ? <Spinner size="sm" color="white" /> : "Checkout"}
+                {isLoadingCreateOrder ? <Spinner size="sm" color="white" /> : "Checkout"}
               </Button>
             </>
           )}

@@ -8,7 +8,7 @@ import useTransaction from "./useTransaction"
 import useChangeUrl from "@/src/hooks/useChangeUrl"
 import { convertIDR } from "@/src/utils/currency"
 import DropdownAction from "@/src/components/common/DropdownAction"
-import DataTable from "@/src/components/ui/DataTable"
+import DataTable from "@/src/components/ui/DataTable"   
 
 const Transaction = () => {
     const router = useRouter();

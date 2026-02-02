@@ -22,7 +22,7 @@ const HomeBanner = (props: IHomeBanner) => {
                 <Swiper pagination={{ dynamicBullets: true, clickable: true }} spaceBetween={30} loop modules={[Autoplay, Pagination]} className="h-full w-full" autoplay={{ delay: 2500, disableOnInteraction: false }}>
                     {banners.map((banner: IBanner) => (
                         <SwiperSlide key={banner._id}>
-                            <Image src={`${banner.image}`} alt={`${banner.title}`} width={1920} height={800} className="h-[80%] w-full rounded-2xl object-cover lg:h-[90%]" />
+                            <Image src={`${banner.image}`} alt={`${banner.title}`} width={800} height={800} className="h-[80%] w-full rounded-2xl xs:object-cover lg:h-[90%]" />
                         </SwiperSlide>
                     ))}
                 </Swiper>
