@@ -8,10 +8,10 @@ interface SnapPayResult {
 }
 
 interface SnapPayCallbacks {
-  onSuccess: (result: SnapPayResult) => void;
-  onPending: (result: SnapPayResult) => void;
-  onError: (result: SnapPayResult) => void;
-  onClose: () => void;
+  onSuccess?: (result: SnapPayResult) => void;
+  onPending?: (result: SnapPayResult) => void;
+  onError?: (result: SnapPayResult) => void;
+  onClose?: () => void;
 }
 
 interface Snap {

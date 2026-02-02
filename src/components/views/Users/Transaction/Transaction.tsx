@@ -41,7 +41,7 @@ const Transaction = () => {
                 case "actions":
                     return (
                         <DropdownAction
-                            onPressButtonDetail={() => router.push(`/member/transaction/${transaction.orderId}`)}
+                            onPressButtonDetail={() => router.push(`/transaction/${transaction.orderId}`)}
                             hideButtonDelete
                         />
                     )
