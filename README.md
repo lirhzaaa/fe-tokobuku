@@ -1,6 +1,6 @@
 # Tokobuku Frontend Web Application
 
-Frontend application for **Tokobuku – Your Smart Library**. This web app provides the user interface for browsing books, managing carts, and completing transactions.
+Frontend application for **Tokobuku - Your Smart Library**. This web app provides the user interface for browsing books, managing carts, and completing transactions.
 
 ## 🔗 Links
 
