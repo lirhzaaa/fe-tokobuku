@@ -111,7 +111,7 @@ export default function DashboardLayoutClient({
                     <DropdownItem key="username" className="h-12 gap-2">
                       <p className="font-semibold">@{dataProfile?.username}</p>
                     </DropdownItem>
-                    {!isAdmin ? (
+                    {dataProfile?.role === "admin" ? (
                       <DropdownItem key="admin" href="/admin">Admin</DropdownItem>
                     ) : null}
                     <DropdownItem key="profile" href="/profile">Profile</DropdownItem>
