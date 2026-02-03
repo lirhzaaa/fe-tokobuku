@@ -45,13 +45,13 @@ const DeleteTransaction = (props: IDeleteTransaction) => {
                     <p className="text-medium">Are you sure you want to delete this Transaction?</p>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" variant="flat" disabled={isPendingDeleteTransaction} onPress={() => {
+                    <Button color="primary" variant="flat" disabled={isPendingDeleteTransaction} onPress={() => {
                         onClose()
                         setSelectedId("")
                     }}>
                         Cancel
                     </Button>
-                    <Button color="danger" type="submit" disabled={isPendingDeleteTransaction} onPress={() => mutateDeleteTransaction(selectedId)}>
+                    <Button color="primary" type="submit" disabled={isPendingDeleteTransaction} onPress={() => mutateDeleteTransaction(selectedId)}>
                         {isPendingDeleteTransaction ? (
                             <Spinner size="sm" color="white" />
                         ) : "Delete Transaction"}

@@ -22,16 +22,14 @@ interface HomeTransaction {
 }
 
 const useHome = () => {
-  // Query untuk table (10 data saja)
   const getHomeTransactions = async () => {
     const params = `limit=10&page=1&search=`;
     const result = await orderServices.getOrders(params);
     return result.data;
   };
 
-  // Query untuk chart (ambil lebih banyak data)
   const getChartData = async () => {
-    const params = `limit=100&page=1&search=`; // Ambil 100 transaksi untuk chart
+    const params = `limit=100&page=1&search=`;
     const result = await orderServices.getOrders(params);
     return result.data;
   };
@@ -62,7 +60,6 @@ const useHome = () => {
         const rawDate = transaction.createdAt ?? transaction.date!
         const dateObj = new Date(rawDate)
         
-        // Gunakan format ISO sebagai key untuk grouping (YYYY-MM-DD)
         const dateKey = dateObj.toISOString().split('T')[0]
         
         acc[dateKey] = (acc[dateKey] || 0) + (transaction.total ?? 0)
@@ -76,7 +73,7 @@ const useHome = () => {
         date,
         value,
       }))
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()) // Urutkan berdasarkan tanggal
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   }, [dataChart])
 
