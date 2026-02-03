@@ -22,8 +22,16 @@ interface HomeTransaction {
 }
 
 const useHome = () => {
+  // Query untuk table (10 data saja)
   const getHomeTransactions = async () => {
     const params = `limit=10&page=1&search=`;
+    const result = await orderServices.getOrders(params);
+    return result.data;
+  };
+
+  // Query untuk chart (ambil lebih banyak data)
+  const getChartData = async () => {
+    const params = `limit=100&page=1&search=`; // Ambil 100 transaksi untuk chart
     const result = await orderServices.getOrders(params);
     return result.data;
   };
@@ -36,20 +44,28 @@ const useHome = () => {
     queryFn: getHomeTransactions,
   });
 
-  const chartData = useMemo<HomeChartItem[]>(() => {
-    if (!dataTransactions?.data) return []
+  const {
+    data: dataChart,
+    isLoading: isLoadingChart,
+  } = useQuery({
+    queryKey: ["HomeChart"],
+    queryFn: getChartData,
+  });
 
-    const groupedByDate = dataTransactions.data.reduce(
+  const chartData = useMemo<HomeChartItem[]>(() => {
+    if (!dataChart?.data) return []
+
+    const groupedByDate = dataChart.data.reduce(
       (acc: Record<string, number>, transaction: HomeTransaction) => {
         if (!transaction.createdAt && !transaction.date) return acc
 
         const rawDate = transaction.createdAt ?? transaction.date!
-        const date = new Date(rawDate).toLocaleDateString("id-ID", {
-          day: "2-digit",
-          month: "short",
-        })
-
-        acc[date] = (acc[date] || 0) + (transaction.total ?? 0)
+        const dateObj = new Date(rawDate)
+        
+        // Gunakan format ISO sebagai key untuk grouping (YYYY-MM-DD)
+        const dateKey = dateObj.toISOString().split('T')[0]
+        
+        acc[dateKey] = (acc[dateKey] || 0) + (transaction.total ?? 0)
         return acc
       },
       {}
@@ -60,9 +76,9 @@ const useHome = () => {
         date,
         value,
       }))
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()) // Urutkan berdasarkan tanggal
 
-  }, [dataTransactions])
-
+  }, [dataChart])
 
   const statusData = useMemo<HomeStatusItem[]>(() => {
     if (!dataTransactions?.data) return []
@@ -83,10 +99,10 @@ const useHome = () => {
       }))
   }, [dataTransactions])
 
-
   return {
     dataTransactions,
     isLoadingTransactions,
+    isLoadingChart,
     chartData,
     statusData,
   };

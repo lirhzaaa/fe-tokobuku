@@ -112,7 +112,7 @@ const InfoTab = (props: IInfoTypes) => {
                             render={({ field }) => (
                                 <Input
                                     {...field}
-                                    label="Author (Optional)"
+                                    label="Author"
                                     placeholder="Author name"
                                     variant="bordered"
                                     labelPlacement="outside"

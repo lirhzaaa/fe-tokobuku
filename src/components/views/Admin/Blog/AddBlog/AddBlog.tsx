@@ -80,12 +80,11 @@ const AddBlog = (props: IAddBlog) => {
                                 render={({ field }) => (
                                     <Input
                                         {...field}
-                                        label="Slug (Optional - auto-generated from title)"
+                                        label="Slug"
                                         placeholder="my-blog-post"
                                         variant="bordered"
                                         isInvalid={!!errors.slug}
                                         errorMessage={errors.slug?.message}
-                                        description="Leave empty to auto-generate from title"
                                     />
                                 )}
                             />
@@ -112,7 +111,7 @@ const AddBlog = (props: IAddBlog) => {
                                 render={({ field }) => (
                                     <Input
                                         {...field}
-                                        label="Author (Optional)"
+                                        label="Author"
                                         placeholder="Author name"
                                         variant="bordered"
                                         isInvalid={!!errors.author}
